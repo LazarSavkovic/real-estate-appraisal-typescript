@@ -1,0 +1,17 @@
+.imgStyle{
+    @apply bg-gradient-to-r from-blue-500 to-indigo-500 rounded-l-md hidden lg:inline ;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.cartoonImg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('/images/houses.png') no-repeat;
+    bottom:0;left:0;right:0;top:0;
+    background-size: 400px;
+    background-position: 45% 50%;
+    z-index: 1;
+}
