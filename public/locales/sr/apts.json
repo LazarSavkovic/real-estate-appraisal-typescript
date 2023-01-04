@@ -1,0 +1,16 @@
+{
+    "more details": "Više detalja",
+    "properties in belgrade" : "Nekretnine u Beogradu",
+    "title": "Naziv",
+    "price": "Cena",
+    "address": "Adresa",
+    "short description": "Kratak opis",
+    "area": "Površina",
+    "rooms": "Broj soba",
+    "floor": "Sprat",
+    "latitude": "Latituda",
+    "longitude": "Longituda",
+    "edit": "Izmeni",
+    "delete": "Izbriši",
+    "submit": "Unesi"
+}

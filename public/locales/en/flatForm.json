@@ -1,0 +1,8 @@
+{
+    "title is missing" : "You haven't entered the title",
+    "address is missing" : "You haven't entered the address",
+    "description is missing" : "You haven't entered the description",
+    "area is missing" : "You haven't entered the area",
+    "rooms is missing" : "You haven't entered the number of rooms",
+    "floor is missing" : "You haven't entered the floor number"
+}

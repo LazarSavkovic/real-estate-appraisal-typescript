@@ -1,0 +1,16 @@
+{
+    "more details": "More details",
+    "properties in belgrade" : "Properties in Belgrade",
+    "title": "Title",
+    "price": "Price",
+    "address": "Address",
+    "short description": "Short description",
+    "area": "Area",
+    "rooms": "Number of rooms",
+    "floor": "Floor",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "edit": "Edit",
+    "delete": "Delete",
+    "submit": "Submit"
+}

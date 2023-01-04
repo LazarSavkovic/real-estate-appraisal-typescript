@@ -1,0 +1,14 @@
+{
+    "log in": "Log In",
+    "log in with google" : "Log in with your Google account",
+    "log in with github": "Log in with your Github account",
+    "dont have account?": "Don't have an account?",
+    "register": "Register",
+    "email": "e-mail",
+    "password": "password",
+    "email is missing" : "You haven't entered your e-mail",
+    "password is missing": "You haven't entered your email",
+    "not a valid email": "Not a valid e-mail",
+    "not a valid password": "Not a valid password",
+    "password length between 8 and 20 characters": "Password must between 8 and 20 characters"
+}

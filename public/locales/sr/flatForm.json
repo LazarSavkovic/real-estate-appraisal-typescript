@@ -1,0 +1,8 @@
+{
+    "title is missing" : "Naziv je obavezno polje",
+    "address is missing" : "Adresa je obavezno polje",
+    "description is missing" : "Opis je obavezno polje",
+    "area is missing" : "Površina je obavezno polje",
+    "rooms is missing" : "Broj soba je obavezno polje",
+    "floor is missing" : "Broj sprata je obavezno polje"
+}

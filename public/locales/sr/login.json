@@ -1,0 +1,14 @@
+{
+    "log in": "Prijavi se",
+    "log in with google": "Prijavi se sa Google nalogom",
+    "log in with github":  "Prijavi se sa Github nalogom",
+    "dont have account?": "Nemaš nalog?",
+    "register": "Registruj se",
+    "email": "E-mail",
+    "password": "Šifra",
+    "email is missing": "E-mail je obavezno polje",
+    "password is missing": "E-mail je obavezno polje",
+    "not a valid email": "E-mail nije validan",
+    "not a valid password": "Šifra nije validna",
+    "password length between 8 and 20 characters": "Šifra mora biti između 8 i 20 karaktera"
+}
