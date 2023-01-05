@@ -2,9 +2,10 @@ import Link from 'next/link'
 import Button from '../Button'
 import AptMaps from './AptMaps'
 import { useTranslation } from 'next-i18next'
+import { FC } from 'react'
 
 
-const AptBigCard = ({ apt, handleDelete }) => {
+const AptBigCard: FC = ({ apt, handleDelete }) => {
 
     const {t} = useTranslation('apts')
 

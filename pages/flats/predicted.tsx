@@ -1,12 +1,12 @@
 import styles from '../../styles/Home.module.css'
 import { getSession } from 'next-auth/react'
 import FlatCard from '../../components/FlatComponents/FlatCard'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, FC } from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 
 
-const PredictedFlats = () => {
+const PredictedFlats: FC = () => {
 
     const [flats, setFlats] = useState([])
 

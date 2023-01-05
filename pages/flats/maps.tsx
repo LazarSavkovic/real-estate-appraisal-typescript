@@ -1,7 +1,7 @@
 import { getSession } from 'next-auth/react'
 import Dashboard from '../../components/Dashboard'
 import Map, { Marker, Popup } from 'react-map-gl';
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import { getCenter } from 'geolib'
 import { getFlats } from '../../utils/ApiCalls'
 
@@ -10,7 +10,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 
 
-const Maps = ({ session }) => {
+const Maps: FC = ({ session }) => {
 
     const [selectedLocation, setSelectedLocation] = useState({});
     const [showPopup, setShowPopup] = useState(false);

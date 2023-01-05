@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/react'
 import styles from '../styles/Dashboard.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, FC } from 'react'
 // import {motion} from 'framer-motion'
 import { useTranslation } from 'next-i18next'
 
-const Dashboard = ({ children, session, setSearchInput, searchInput }) => {
+const Dashboard: FC = ({ children, session, setSearchInput, searchInput }) => {
 
     const {t} = useTranslation('dashboard');
 

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, FC } from 'react'
 import { useRouter } from 'next/router'
 import FlatBigCard from '../../../components/FlatComponents/FlatBigCard'
 import { getSession } from 'next-auth/react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 
-const PredictedFlatPage = () => {
+const PredictedFlatPage: FC = () => {
   const router = useRouter()
   const [message, setMessage] = useState('')
   const [flat, setFlat] = useState(false)

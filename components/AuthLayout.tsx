@@ -1,6 +1,7 @@
 import styles from '../styles/AuthLayout.module.css'
+import { FC } from 'react'
 
-const AuthLayout = ({ children }) => {
+const AuthLayout: FC = ({ children }) => {
 
     return (
         <div className="flex h-screen bg-blue-400">

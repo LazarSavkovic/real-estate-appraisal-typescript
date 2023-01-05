@@ -1,5 +1,5 @@
 import AptCard from '../../components/AptComponents/AptCard'
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import Pagination from "../../components/Pagination";
 import { paginate } from "../../lib/paginate";
 // import { motion } from 'framer-motion'
@@ -9,7 +9,7 @@ import { getApts } from '../../utils/ApiCalls';
 import { useTranslation } from 'next-i18next';
 
 
-const Index = () => {
+const Index: FC = () => {
 
   const {t} = useTranslation('apts')
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
 import FlatBigCard from '../../../components/FlatComponents/FlatBigCard'
 import { getSession } from 'next-auth/react'
@@ -9,7 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 
 /* Allows you to view apt card info and delete apt card*/
-const FlatPage = ({session, userId, flatId}) => {
+const FlatPage: FC = ({session, userId, flatId}) => {
 
   const {t} = useTranslation('flats')
 

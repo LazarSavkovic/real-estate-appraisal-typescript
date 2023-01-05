@@ -3,13 +3,13 @@ import FlatCard from '../../components/FlatComponents/FlatCard'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import Dashboard from '../../components/Dashboard'
 import { getFlats } from '../../utils/ApiCalls'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 
 
-const Flats = ({ session }) => {
+const Flats: FC = ({ session }) => {
 
   const [flats, setFlats] = useState([])
   const { isLoading, isError, error } = useQuery('flats', () => getFlats(session.user._id),  {onSuccess: setFlats})

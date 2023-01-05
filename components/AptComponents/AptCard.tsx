@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
+import { FC } from 'react'
 
-const AptCard = ({ apt }) => {
+const AptCard: FC = ({ apt }) => {
     const {t} = useTranslation('apts')
 
     return (

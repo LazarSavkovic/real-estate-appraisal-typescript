@@ -1,26 +1,26 @@
-import { Todo } from "../../utils/types"
+import { TodoType } from "../../utils/types"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useState, FC } from "react"
 
 // Define Prop Interface
 interface ShowProps {
-  todo: Todo
+  todo: TodoType
   url: string
 }
 
 // Define Component
-function Show(props: ShowProps) {
+const Show: FC<ShowProps> = (props: ShowProps) => {
   // get the next router, so we can use router.push later
   const router = useRouter()
 
   // set the todo as state for modification
-  const [todo, setTodo] = useState<Todo>(props.todo)
+  const [todo, setTodo] = useState<TodoType>(props.todo)
 
   // function to complete a todo
   const handleComplete = async () => {
     if (!todo.completed) {
       // make copy of todo with completed set to true
-      const newTodo: Todo = { ...todo, completed: true }
+      const newTodo: TodoType = { ...todo, completed: true }
       // make api call to change completed in database
       await fetch(props.url + "/" + todo._id, {
         method: "put",

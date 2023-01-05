@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
+import { FC } from 'react'
 // import { motion } from 'framer-motion'
 
-const FlatCard = ({ flat, predicted }) => {
+const FlatCard: FC = ({ flat, predicted }) => {
 
     const {t} = useTranslation('flats')
     return (

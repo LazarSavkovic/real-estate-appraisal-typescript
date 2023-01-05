@@ -5,10 +5,10 @@ import Layout from '../components/Layout'
 import { appWithTranslation } from 'next-i18next'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
 
-function App({ Component, pageProps }: AppProps) {
+const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
   const [queryClient] = useState(() => new QueryClient())
 

@@ -3,10 +3,11 @@ import AptForm from '../../../components/AptComponents/AptForm'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { getApt } from '../../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { FC } from 'react';
 
 
 
-const EditApt = ({id}) => {
+const EditApt: FC = ({id}) => {
   const router = useRouter()
 
   const { data: apt, error } = useQuery(['apts', id], () => getApt(id))

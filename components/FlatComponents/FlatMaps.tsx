@@ -1,8 +1,8 @@
 
 import Map, { Marker, Popup } from 'react-map-gl';
-import { useState } from 'react'
+import { useState, FC } from 'react'
 
-const FlatMaps = ({ longitude, latitude, apts }) => {
+const FlatMaps: FC = ({ longitude, latitude, apts }) => {
 
     const [showPopup, setShowPopup] = useState(false);
 

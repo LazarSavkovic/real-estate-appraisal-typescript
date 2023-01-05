@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import AptBigCard from '../../../components/AptComponents/AptBigCard'
@@ -8,7 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 
 /* Allows you to view apt card info and delete apt card*/
-const AptPage = ({id}) => {
+const AptPage: FC = ({id}) => {
 
   const router = useRouter()
 

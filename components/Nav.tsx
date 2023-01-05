@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 import Button from './Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next'
 
 
 
-const Nav = () => {
+const Nav: FC = () => {
     const { t } = useTranslation('common');
     let Links = [
         { name: t('my properties'), link: "/flats" },

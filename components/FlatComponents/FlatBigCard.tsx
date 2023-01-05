@@ -1,16 +1,18 @@
 import Link from 'next/link'
 import FlatMaps from './FlatMaps'
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import { useTranslation } from 'next-i18next'
+import { FC } from 'react'
 
-const FlatBigCard = ({ flat, handleDelete, apts }) => {
+const FlatBigCard: FC = ({ flat, handleDelete, apts }) => {
 
     const {t} = useTranslation('flats')
     return (
 
-        <motion.div initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
+        <div 
+        // initial={{ opacity: 0, scale: 0.8 }}
+        //     animate={{ opacity: 1, scale: 1 }}
+        //     transition={{ duration: 0.3 }}
             className="flex flex-col  bg-white border rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full m-0">
             <div className="flex justify-between items-center md:w-2/4">
                 <FlatMaps latitude={flat.geometry.coordinates[1]} longitude={flat.geometry.coordinates[0]} apts={apts}/>
@@ -33,7 +35,7 @@ const FlatBigCard = ({ flat, handleDelete, apts }) => {
                     </button>
                 </div>
             </div>
-        </motion.div>
+        </div>
     )
 }
 

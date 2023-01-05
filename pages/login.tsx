@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Form.module.css'
 import { HiAtSymbol, HiFingerPrint } from 'react-icons/hi'
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import { signIn, signOut } from 'next-auth/react'
 import { useFormik } from 'formik'
 import { loginValidate } from '../lib/validate'
@@ -13,7 +13,7 @@ import { motion } from 'framer-motion'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 
-const Login = () => {
+const Login: FC = () => {
 
     const {t} = useTranslation('login')
     

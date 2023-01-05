@@ -1,6 +1,7 @@
 import Nav from './Nav'
+import { FC } from 'react'
 
-const Layout = ({ children }) => {
+const Layout: FC = ({ children }) => {
     return (
         <div>
             <Nav/>

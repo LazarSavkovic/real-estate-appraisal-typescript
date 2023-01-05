@@ -1,8 +1,8 @@
 
 import Map, { Source, Layer } from 'react-map-gl';
-import { useState } from 'react'
+import { useState, FC } from 'react'
 
-const AptMaps = ({ longitude, latitude }) => {
+const AptMaps: FC = ({ longitude, latitude }) => {
 
     const geojson = {
         type: 'FeatureCollection',

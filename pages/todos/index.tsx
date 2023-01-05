@@ -1,13 +1,14 @@
-import { Todo } from "../../utils/types"
+import { TodoType } from "../../utils/types"
 import Link from "next/link"
+import { FC } from 'react'
 
 // Define the components props
 interface IndexProps {
-  todos: Array<Todo>
+  todos: Array<TodoType>
 }
 
 // define the page component
-function Index(props: IndexProps) {
+const Index: FC<IndexProps> = (props: IndexProps) => {
   const { todos } = props
 
   return (

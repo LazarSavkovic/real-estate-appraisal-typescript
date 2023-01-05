@@ -4,11 +4,12 @@ import { getFlat } from '../../../utils/ApiCalls'
 import { getSession, } from 'next-auth/react'
 import Dashboard from '../../../components/Dashboard'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { FC } from 'react';
 
 
 
 
-const EditFlat = ({ session, userId, flatId }) => {
+const EditFlat: FC = ({ session, userId, flatId }) => {
 
   const { data: flat, error } = useQuery(['flats', flatId], () => getFlat({ userId, flatId }))
 

@@ -1,8 +1,9 @@
 import AptForm from '../../components/AptComponents/AptForm'
 import AuthLayout from '../../components/AuthLayout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { FC } from 'react'
 
-const NewApt = () => {
+const NewApt: FC = () => {
   const aptForm = {
     title: '',
     price: 0,
