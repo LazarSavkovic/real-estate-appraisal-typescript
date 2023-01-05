@@ -1,6 +1,7 @@
 import { TodoType } from "../../utils/types"
 import Link from "next/link"
 import { FC } from 'react'
+import { GetServerSideProps } from 'next'
 
 // Define the components props
 interface IndexProps {
@@ -31,7 +32,7 @@ const Index: FC<IndexProps> = (props: IndexProps) => {
 }
 
 // GET PROPS FOR SERVER SIDE RENDERING
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   // get todo data from API
   const res = await fetch(process.env.API_URL as string)
   const todos = await res.json()

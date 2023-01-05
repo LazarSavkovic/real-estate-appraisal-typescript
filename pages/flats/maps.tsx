@@ -4,10 +4,9 @@ import Map, { Marker, Popup } from 'react-map-gl';
 import { useState, FC } from 'react'
 import { getCenter } from 'geolib'
 import { getFlats } from '../../utils/ApiCalls'
-
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
 import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { GetServerSideProps } from 'next'
 
 
 const Maps: FC = ({ session }) => {
@@ -100,7 +99,7 @@ const Maps: FC = ({ session }) => {
     )
 }
 
-export async function getServerSideProps({ req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
     const session = await getSession({ req })
 
     if (!session) {

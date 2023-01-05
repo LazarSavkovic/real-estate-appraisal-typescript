@@ -5,6 +5,7 @@ import { useSession, signOut } from 'next-auth/react'
 import AuthLayout from '../components/AuthLayout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { GetStaticProps } from 'next'
 
 const Guest: FC = () => {
   const { t } = useTranslation('index')
@@ -70,9 +71,7 @@ const Home: FC = () => {
   )
 }
 
-export async function getStaticProps(
-  { locale }
-) {
+export const getStaticProps: GetStaticProps = ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['index', 'common'])),

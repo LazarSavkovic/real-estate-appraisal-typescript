@@ -1,6 +1,7 @@
 import { TodoType } from "../../utils/types"
 import { useRouter } from "next/router"
 import { useState, FC } from "react"
+import { GetServerSideProps } from 'next'
 
 // Define Prop Interface
 interface ShowProps {
@@ -64,7 +65,7 @@ const Show: FC<ShowProps> = (props: ShowProps) => {
 }
 
 // Define Server Side Props
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
   // fetch the todo, the param was received via context.query.id
   const res = await fetch(process.env.API_URL + "/" + context.query.id)
   const todo = await res.json()

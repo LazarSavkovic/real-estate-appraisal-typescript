@@ -7,6 +7,7 @@ import { dehydrate, QueryClient, useQuery, useMutation, useQueryClient} from 're
 import { getFlat, getApts, deleteFlat } from '../../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { GetServerSideProps } from 'next'
 
 /* Allows you to view apt card info and delete apt card*/
 const FlatPage: FC = ({session, userId, flatId}) => {
@@ -76,7 +77,7 @@ const FlatPage: FC = ({session, userId, flatId}) => {
 
 
 
-export async function getServerSideProps({ params, req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ params, req, locale }) => {
 
   const session = await getSession({ req })
 

@@ -7,11 +7,12 @@ import { HiAtSymbol, HiFingerPrint } from 'react-icons/hi'
 import { useState, FC } from 'react'
 import { signIn, signOut } from 'next-auth/react'
 import { useFormik } from 'formik'
-import { loginValidate } from '../lib/validate'
+import { loginValidate } from '../utils/validate'
 import { useRouter } from 'next/router'
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { GetStaticProps } from 'next'
 
 const Login: FC = () => {
 
@@ -47,15 +48,15 @@ const Login: FC = () => {
             <Head>
                 <title>{t('log in')}</title>
             </Head>
-            <motion.section
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.7 }}
-                transition={{
-                    duration: 0.5,
-                    delay: 0.3,
-                    ease: [0, 0.71, 0.2, 1.01]
-                }}
+            <section
+                // initial={{ opacity: 0, scale: 0.7 }}
+                // animate={{ opacity: 1, scale: 1 }}
+                // exit={{ opacity: 0, scale: 0.7 }}
+                // transition={{
+                //     duration: 0.5,
+                //     delay: 0.3,
+                //     ease: [0, 0.71, 0.2, 1.01]
+                // }}
                 className='w-3/4 mx-auto flex flex-col gap-5'>
                 <div className='title'>
                     <h1 className='text-gray-800 text-2xl font-bold py-2 tracking-wider'>{t('log in')}</h1></div>
@@ -97,14 +98,14 @@ const Login: FC = () => {
                 <p className='text-center text-gray-400'>
                 {t('dont have account?')} <Link href='/register' legacyBehavior><a className='text-blue-700'>{t('register')}</a></Link>
                 </p>
-            </motion.section>
+            </section>
         </AuthLayout >
     )
 }
 
 
 
-export async function getStaticProps({ locale }) {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
       props: {
         ...(await serverSideTranslations(locale, ['login', 'common'])),

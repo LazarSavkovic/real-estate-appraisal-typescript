@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import FlatBigCard from '../../../components/FlatComponents/FlatBigCard'
 import { getSession } from 'next-auth/react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetServerSideProps } from 'next'
 
 
 const PredictedFlatPage: FC = () => {
@@ -48,7 +49,7 @@ const PredictedFlatPage: FC = () => {
 
 
 
-export async function getServerSideProps({ params, req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ params, req, locale }) => {
 
   const session = await getSession({ req })
 

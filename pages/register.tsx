@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 // import { motion } from 'framer-motion'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import { GetStaticProps } from 'next'
 
 const Register: FC = () => {
 
@@ -125,7 +126,7 @@ const Register: FC = () => {
 }
 
 
-export async function getStaticProps({ locale }) {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
       props: {
         ...(await serverSideTranslations(locale, ['register', 'common'])),

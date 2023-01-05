@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react'
 import FlatCard from '../../components/FlatComponents/FlatCard'
 import { useEffect, useState, FC } from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
+import { GetServerSideProps } from 'next'
 
 
 const PredictedFlats: FC = () => {
@@ -30,7 +30,7 @@ const PredictedFlats: FC = () => {
     )
 }
 
-export async function getServerSideProps({ req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
     const session = await getSession({ req })
 
     if (session) {

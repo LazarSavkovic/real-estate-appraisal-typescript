@@ -5,6 +5,7 @@ import { getSession, } from 'next-auth/react'
 import Dashboard from '../../../components/Dashboard'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react';
+import { GetServerSideProps } from 'next'
 
 
 
@@ -40,7 +41,7 @@ const EditFlat: FC = ({ session, userId, flatId }) => {
 }
 
 
-export async function getServerSideProps({ params, req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ params, req, locale }) => {
 
 
   const session = await getSession({ req })

@@ -5,6 +5,7 @@ import AptBigCard from '../../../components/AptComponents/AptBigCard'
 import { getApt } from '../../../utils/ApiCalls'
 import { dehydrate, QueryClient, useQuery, useQueryClient } from 'react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetServerSideProps } from 'next'
 
 
 /* Allows you to view apt card info and delete apt card*/
@@ -45,7 +46,7 @@ const AptPage: FC = ({id}) => {
   )
 }
 
-export async function getServerSideProps({ params, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
 
   const id = params.id;
 

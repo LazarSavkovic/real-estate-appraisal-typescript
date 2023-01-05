@@ -4,6 +4,7 @@ import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { getApt } from '../../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react';
+import { GetServerSideProps } from 'next'
 
 
 
@@ -37,7 +38,7 @@ const EditApt: FC = ({id}) => {
 }
 
 
-export async function getServerSideProps({ params, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
 
   const id = params.id;
 

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import { FormEvent, FormEventHandler, useRef, FC } from "react"
 import { TodoType } from "../../utils/types"
+import { GetStaticProps } from 'next'
 
 // Define props
 interface CreateProps {
@@ -50,7 +51,7 @@ const Create: FC<CreateProps> = (props: CreateProps) => {
 }
 
 // export getStaticProps to provie API_URL to component
-export async function getStaticProps(context: any) {
+export const getStaticProps: GetStaticProps = async (context: any) => {
   return {
     props: {
       url: process.env.API_URL,

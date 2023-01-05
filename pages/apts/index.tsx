@@ -1,12 +1,13 @@
 import AptCard from '../../components/AptComponents/AptCard'
 import { useEffect, useState, FC } from "react";
 import Pagination from "../../components/Pagination";
-import { paginate } from "../../lib/paginate";
+import { paginate } from "../../utils/paginate";
 // import { motion } from 'framer-motion'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getApts } from '../../utils/ApiCalls';
 import { useTranslation } from 'next-i18next';
+import { GetServerSideProps } from 'next'
 
 
 const Index: FC = () => {
@@ -72,7 +73,7 @@ const Index: FC = () => {
   )
 }
 
-export async function getServerSideProps({locale}) {
+export const getServerSideProps: GetServerSideProps = async ({locale}) => {
 
   const queryClient = new QueryClient()
 

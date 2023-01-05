@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/react'
 import Dashboard from '../../components/Dashboard'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react'
+import { GetServerSideProps } from 'next'
 
 const PredictNewFlat: FC = () => {
   const flatForm = {
@@ -30,7 +31,7 @@ const PredictNewFlat: FC = () => {
 }
 
 
-export async function getServerSideProps({ req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
   const session = await getSession({ req })
 
   if (session) {

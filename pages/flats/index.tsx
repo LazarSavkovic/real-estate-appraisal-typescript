@@ -6,6 +6,7 @@ import { getFlats } from '../../utils/ApiCalls'
 import { useEffect, useState, FC } from 'react';
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { GetServerSideProps } from 'next'
 
 
 
@@ -62,7 +63,7 @@ const Flats: FC = ({ session }) => {
   )
 }
 
-export async function getServerSideProps({ req, locale }) {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
   const session = await getSession({ req })
 
   if (!session) {

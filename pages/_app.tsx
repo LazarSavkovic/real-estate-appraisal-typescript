@@ -18,9 +18,11 @@ const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
-        <Layout {...pageProps}>
-          <Component {...pageProps} />
-        </ Layout>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Layout {...pageProps}>
+            <Component {...pageProps} />
+          </ Layout>
+        </Hydrate>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ SessionProvider>

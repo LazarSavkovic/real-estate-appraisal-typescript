@@ -2,6 +2,7 @@ import AptForm from '../../components/AptComponents/AptForm'
 import AuthLayout from '../../components/AuthLayout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react'
+import { GetServerSideProps } from 'next'
 
 const NewApt: FC = () => {
   const aptForm = {
@@ -31,7 +32,7 @@ const NewApt: FC = () => {
   )
 }
 
-export async function getServerSideProps({locale}) {
+export const getServerSideProps: GetServerSideProps = async ({locale}) => {
 
   return {
     props: {
