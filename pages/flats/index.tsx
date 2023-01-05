@@ -2,7 +2,7 @@ import { getSession } from 'next-auth/react'
 import FlatCard from '../../components/FlatComponents/FlatCard'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import Dashboard from '../../components/Dashboard'
-import { getFlats } from '../../lib/ApiCalls'
+import { getFlats } from '../../utils/ApiCalls'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'

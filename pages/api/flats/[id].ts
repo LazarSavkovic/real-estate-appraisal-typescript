@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { connect } from "../../../utils/connection"
-import { ResponseFuncs } from "../../../utils/types"
+import { ResponseFuncs, FlatType } from "../../../utils/types"
 import Flat from "../../../models/Flat"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -16,19 +16,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Potential Responses for /todos/:id
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse) => {
+    GET: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
       await connect() // connect to database
       res.json(await Flat.findById(id).catch(catcher))
     },
     // RESPONSE PUT REQUESTS
-    PUT: async (req: NextApiRequest, res: NextApiResponse) => {
+    PUT: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
       await connect() // connect to database
       res.json(
         await Flat.findByIdAndUpdate(id, req.body, { new: true }).catch(catcher)
       )
     },
     // RESPONSE FOR DELETE REQUESTS
-    DELETE: async (req: NextApiRequest, res: NextApiResponse) => {
+    DELETE: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
       await connect() // connect to database
       res.json(await Flat.findByIdAndRemove(id).catch(catcher))
     },

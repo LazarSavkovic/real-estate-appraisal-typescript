@@ -1,6 +1,6 @@
 import FlatForm from '../../../components/FlatComponents/FlatForm'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
-import { getFlat } from '../../../lib/ApiCalls'
+import { getFlat } from '../../../utils/ApiCalls'
 import { getSession, } from 'next-auth/react'
 import Dashboard from '../../../components/Dashboard'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'

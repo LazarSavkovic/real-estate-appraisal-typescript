@@ -2,10 +2,10 @@ import AptCard from '../../components/AptComponents/AptCard'
 import { useEffect, useState } from "react";
 import Pagination from "../../components/Pagination";
 import { paginate } from "../../lib/paginate";
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getApts } from '../../lib/ApiCalls';
+import { getApts } from '../../utils/ApiCalls';
 import { useTranslation } from 'next-i18next';
 
 
@@ -44,17 +44,18 @@ const Index = () => {
          {t('properties in belgrade')}
         </h1>
         {paginatedPosts && <>
-          <motion.div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}>
+          <div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'
+            // initial={{ opacity: 0, scale: 0.5 }}
+            // animate={{ opacity: 1, scale: 1 }}
+            // transition={{ duration: 0.5 }}
+            >
 
 
             {paginatedPosts.map((apt) => (
               <AptCard key={apt._id} apt={apt} />
             ))}
 
-          </motion.div>
+          </div>
 
           <Pagination
             items={posts.length}

@@ -3,7 +3,7 @@ import Dashboard from '../../components/Dashboard'
 import Map, { Marker, Popup } from 'react-map-gl';
 import { useState } from 'react'
 import { getCenter } from 'geolib'
-import { getFlats } from '../../lib/ApiCalls'
+import { getFlats } from '../../utils/ApiCalls'
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import AptBigCard from '../../../components/AptComponents/AptBigCard'
-import { getApt } from '../../../lib/ApiCalls'
+import { getApt } from '../../../utils/ApiCalls'
 import { dehydrate, QueryClient, useQuery, useQueryClient } from 'react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/react'
 import styles from '../styles/Dashboard.module.css'
 import { useEffect, useState } from 'react'
-import {motion} from 'framer-motion'
+// import {motion} from 'framer-motion'
 import { useTranslation } from 'next-i18next'
 
 const Dashboard = ({ children, session, setSearchInput, searchInput }) => {
@@ -55,7 +55,7 @@ const Dashboard = ({ children, session, setSearchInput, searchInput }) => {
 
     return (
         <>
-            <motion.aside 
+            <aside 
        className={`fixed bg-blue-400 z-10 top-14 pb-3 px-6 w-full flex flex-col h-screen border-r bg-white transition-all duration-300 w-6/12  sm:w-5/12 md:w-4/12  lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] ${open ? '' : 'ml-[-100%] '}`}>
                 <div >
                     <div className="mt-16 text-center">
@@ -125,7 +125,7 @@ const Dashboard = ({ children, session, setSearchInput, searchInput }) => {
                         <span className="group-hover:text-gray-700">{t('sign out')}</span>
                     </button>
                 </div>
-            </motion.aside>
+            </aside>
             <div className="lg:ml-auto mb-6 lg:w-[68%] xl:w-[74%] 2xl:w-[81%]">
                 <div className="sticky z-5 top-0 h-16 border-b bg-white lg:py-2.5">
                     <div className="pl-6 flex items-center justify-between space-x-4 2xl:container">

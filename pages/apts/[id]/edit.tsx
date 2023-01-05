@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import AptForm from '../../../components/AptComponents/AptForm'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
-import { getApt } from '../../../lib/ApiCalls'
+import { getApt } from '../../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { connect } from "../../../utils/connection"
-import { ResponseFuncs } from "../../../utils/types"
+import { TodoType, ResponseFuncs } from "../../../utils/types"
 import  Todo from "../../../models/Todo"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,12 +13,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Potential Responses
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse) => {
+    GET: async (req: NextApiRequest, res: NextApiResponse<TodoType[] | void>) => {
       await connect() // connect to database
       res.json(await Todo.find({}).catch(catcher))
     },
     // RESPONSE POST REQUESTS
-    POST: async (req: NextApiRequest, res: NextApiResponse) => {
+    POST: async (req: NextApiRequest, res: NextApiResponse<TodoType>) => {
       await connect() // connect to database
       res.json(await Todo.create(req.body).catch(catcher))
     },

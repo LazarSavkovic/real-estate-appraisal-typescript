@@ -3,7 +3,7 @@ import Button from './Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 import { useTranslation } from 'next-i18next'
 
 
@@ -36,13 +36,13 @@ const Nav = () => {
         router.push('/register')
     }
     return (
-        <motion.div
-            initial={{ y: 25, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-                delay: 0.4,
-                duration: 0.75
-            }}
+        <div
+            // initial={{ y: 25, opacity: 0 }}
+            // animate={{ y: 0, opacity: 1 }}
+            // transition={{
+            //     delay: 0.4,
+            //     duration: 0.75
+            // }}
 
             className='shadow-md w-full fixed top-0 left-0 z-50'>
             <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
@@ -76,7 +76,7 @@ const Nav = () => {
 
                 </ul>
             </div>
-        </motion.div>
+        </div>
     )
 }
 

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { connect } from "../../../utils/connection"
-import { ResponseFuncs } from "../../../utils/types"
+import { ResponseFuncs, AptType } from "../../../utils/types"
 import  Apt from "../../../models/Apt"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,12 +13,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Potential Responses
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse) => {
+    GET: async (req: NextApiRequest, res: NextApiResponse<Array<AptType> | void>) => {
       await connect() // connect to database
       res.json(await Apt.find({}).catch(catcher))
     },
     // RESPONSE POST REQUESTS
-    POST: async (req: NextApiRequest, res: NextApiResponse) => {
+    POST: async (req: NextApiRequest, res: NextApiResponse<AptType>) => {
       await connect() // connect to database
       res.json(await Apt.create(req.body).catch(catcher))
     },

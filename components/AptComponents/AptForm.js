@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { postApt, updateApt } from '../../lib/ApiCalls'
+import { postApt, updateApt } from '../../utils/ApiCalls'
 import { useMutation, QueryClient } from 'react-query'
 import { useTranslation } from 'next-i18next'
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import mongoose from 'mongoose'
 import { useMutation , useQueryClient} from 'react-query'
-import { postFlat, updateFlat } from '../../lib/ApiCalls'
+import { postFlat, updateFlat } from '../../utils/ApiCalls'
 import { useTranslation } from 'next-i18next'
 
 
@@ -14,6 +14,7 @@ const FlatForm = ({ userId, formId, flatForm, forNewFlat = true, justPredict = f
   const contentType = 'application/json'
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
+  console.log(userId)
 
   const [form, setForm] = useState({
     title: flatForm.title,

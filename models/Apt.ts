@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const opts = {toJSON: {virtuals: true}}
+// const opts = {toJSON: {virtuals: true}}
 
 const aptSchema = new mongoose.Schema({
     price: {
@@ -33,10 +33,10 @@ const aptSchema = new mongoose.Schema({
         type: Number,
         // required: true
     }
-}, opts)
+})
 
-aptSchema.virtual("properties.popUpMarkup").get(function() {
-    return `<a href="/apts/${this._id}" class="map-popup-link"><p class="lead">${this.title}</p></a><p>${this.price} €</p>`
-});
+// aptSchema.virtual("properties.popUpMarkup").get(function() {
+//     return `<a href="/apts/${this._id}" class="map-popup-link"><p class="lead">${this.title}</p></a><p>${this.price} €</p>`
+// });
 
 export default mongoose.models.Apt || mongoose.model("Apt", aptSchema);

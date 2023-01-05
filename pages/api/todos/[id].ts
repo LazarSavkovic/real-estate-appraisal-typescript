@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { connect } from "../../../utils/connection"
-import { ResponseFuncs } from "../../../utils/types"
+import { ResponseFuncs, TodoType } from "../../../utils/types"
 import Todo from "../../../models/Todo"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -16,19 +16,19 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Potential Responses for /todos/:id
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse) => {
+    GET: async (req: NextApiRequest, res: NextApiResponse<TodoType>) => {
       await connect() // connect to database
       res.json(await Todo.findById(id).catch(catcher))
     },
     // RESPONSE PUT REQUESTS
-    PUT: async (req: NextApiRequest, res: NextApiResponse) => {
+    PUT: async (req: NextApiRequest, res: NextApiResponse<TodoType>) => {
       await connect() // connect to database
       res.json(
         await Todo.findByIdAndUpdate(id, req.body, { new: true }).catch(catcher)
       )
     },
     // RESPONSE FOR DELETE REQUESTS
-    DELETE: async (req: NextApiRequest, res: NextApiResponse) => {
+    DELETE: async (req: NextApiRequest, res: NextApiResponse<TodoType>) => {
       await connect() // connect to database
       res.json(await Todo.findByIdAndRemove(id).catch(catcher))
     },
