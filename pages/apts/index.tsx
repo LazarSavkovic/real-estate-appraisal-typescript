@@ -3,19 +3,21 @@ import { useEffect, useState, FC } from "react";
 import Pagination from "../../components/Pagination";
 import { paginate } from "../../utils/paginate";
 // import { motion } from 'framer-motion'
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient, useQuery, UseQueryResult } from 'react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getApts } from '../../utils/ApiCalls';
 import { useTranslation } from 'next-i18next';
 import { GetServerSideProps } from 'next'
+import { AptType } from 'utils/types';
 
 
 const Index: FC = () => {
 
-  const {t} = useTranslation('apts')
+  const { t } = useTranslation('apts')
 
-  const [posts, setPosts] = useState([]);
-  const { isLoading, isError, error } = useQuery('apts', getApts, {onSuccess: setPosts})
+  const [posts, setPosts] = useState<AptType[]>([]);
+
+  const { isLoading, isError, error }: UseQueryResult<AptType[], Error> = useQuery<AptType[], Error, AptType[], string>('apts', getApts, { onSuccess: setPosts })
 
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +28,10 @@ const Index: FC = () => {
 
   const paginatedPosts = paginate(posts, currentPage, pageSize);
 
+  useEffect(() => {
+    console.log(posts, isLoading, isError)
+  }, [posts]
+)
 
   if (isLoading) {
     return <div>Učitava se</div>
@@ -37,19 +43,20 @@ const Index: FC = () => {
 
 
 
+
   return (
 
     <div className="flex bg-blue-400 min-h-screen">
       <div className="m-auto bg-slate-50 rounded-md w-3/5 mt-24 pt-16  flex justify-center flex-col min-h-screen">
         <h1 className="text-3xl text-center tracking-wider">
-         {t('properties in belgrade')}
+          {t('properties in belgrade')}
         </h1>
         {paginatedPosts && <>
           <div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'
-            // initial={{ opacity: 0, scale: 0.5 }}
-            // animate={{ opacity: 1, scale: 1 }}
-            // transition={{ duration: 0.5 }}
-            >
+          // initial={{ opacity: 0, scale: 0.5 }}
+          // animate={{ opacity: 1, scale: 1 }}
+          // transition={{ duration: 0.5 }}
+          >
 
 
             {paginatedPosts.map((apt) => (
@@ -65,7 +72,7 @@ const Index: FC = () => {
             onPageChange={handlePageChange}
           />
         </>
-          }
+        }
 
       </div>
     </div>
@@ -73,18 +80,25 @@ const Index: FC = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({locale}) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
-  const queryClient = new QueryClient()
+  // const queryClient = new QueryClient()
+  console.log(locale)
 
-  await queryClient.prefetchQuery('apts', getApts)
+  // await queryClient.prefetchQuery('apts', getApts)
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-      ...(await serverSideTranslations(locale, [ 'common', 'apts'])),
-      // Will be passed to the page component as props
-    },
+  if (locale) {
+    return {
+      props: {
+        // dehydratedState: dehydrate(queryClient),
+        ...(await serverSideTranslations(locale, ['common', 'apts'])),
+        // Will be passed to the page component as props
+      },
+    }
+  } else {
+    return {
+      props: {}
+    }
   }
 }
 

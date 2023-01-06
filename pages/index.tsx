@@ -71,7 +71,7 @@ const Home: FC = () => {
   )
 }
 
-export const getStaticProps: GetStaticProps = ({ locale }) => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['index', 'common'])),

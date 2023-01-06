@@ -1,17 +1,31 @@
 import axios from 'axios';
+import { AptType } from './types';
+
 
 axios.defaults.baseURL = process.env.NEXT_APP_URL
 
 
 // APTS
 
+type GetAptsReponse = AptType[];
 
-export const getApts = async () => {
+export const getApts = async (): Promise<AptType[]> => {
 
-    const res = await axios.get('/api/apts?limit=100')
-    const apts = res.data.data;
+    try {
+        const { data, status } = await axios.get<GetAptsReponse>('/api/apts')
+        // console.log(data)
+        console.log("response status is", status)
+        return data
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log('error message: ', error.message);
+            throw Error(error.message)
+        } else {
+            console.log('unexpected error: ', error);
+            throw Error("An unexpected error occurred");
+        }
 
-    return apts
+    }
 }
 
 

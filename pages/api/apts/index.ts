@@ -15,7 +15,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // RESPONSE FOR GET REQUESTS
     GET: async (req: NextApiRequest, res: NextApiResponse<Array<AptType> | void>) => {
       await connect() // connect to database
-      res.json(await Apt.find({}).catch(catcher))
+      try {
+        const apts = await Apt.find({})
+        // console.log(apts)
+        res.json(apts)
+      } catch(e) {
+        res.status(400).json({ e })
+      }
+
     },
     // RESPONSE POST REQUESTS
     POST: async (req: NextApiRequest, res: NextApiResponse<AptType>) => {
@@ -31,3 +38,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 }
 
 export default handler
+
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+}

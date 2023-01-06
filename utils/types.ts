@@ -18,39 +18,42 @@ export interface TodoType {
 
 
 export interface AptType {
-  price: Number,
-  price_by_surface?: Number,
-  image?: String,
-  subtitle_places?: String[],
-  features?: String[],
-  sq_mt: Number,
-  floor: Number,
-  rooms: Number,
-  short_description: String,
-  title: String,
-  date?: String,
-  lat: Number,
-  long: Number,
+  price: number,
+  price_by_surface?: number,
+  image?: string,
+  subtitle_places?: string[],
+  features?: string[],
+  sq_mt: number,
+  floor: number,
+  rooms: number,
+  short_description: string,
+  title: string,
+  date?: string,
+  lat: number,
+  long: number,
+  _id?: mongoose.Schema.Types.ObjectId,
 }
 
 export interface FlatType {
-  author: mongoose.Schema.Types.ObjectId,
-  location: String,
-  value?: Number,
-  image?: String,
-  sq_mt: Number,
-  rooms: Number,
-  floor: Number,
-  short_description: String,
-  title: String,
-  date?: String,
+  author?: mongoose.Schema.Types.ObjectId,
+  _id?: mongoose.Schema.Types.ObjectId,
+  location: string,
+  value?: number,
+  image?: string,
+  sq_mt: number,
+  rooms: number,
+  floor: number,
+  short_description: string,
+  title: string,
+  date?: string,
   geometry: {
-    coordinates: Number[]
+    coordinates: number[]
   }
 }
 
 export interface UserType {
-  username: String,
-  email: String,
-  password: String
+  username: string,
+  email: string,
+  password: string,
+  _id?: mongoose.Schema.Types.ObjectId,
 }
