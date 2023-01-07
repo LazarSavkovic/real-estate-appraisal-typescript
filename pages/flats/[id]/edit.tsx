@@ -6,11 +6,17 @@ import Dashboard from '../../../components/Dashboard'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react';
 import { GetServerSideProps } from 'next'
+import { Session } from 'utils/types';
+
+interface EditFlatProps {
+  session: Session,
+  userId: string,
+  flatId: string
+}
 
 
 
-
-const EditFlat: FC = ({ session, userId, flatId }) => {
+const EditFlat: FC<EditFlatProps> = ({ session, userId, flatId }: EditFlatProps) => {
 
   const { data: flat, error } = useQuery(['flats', flatId], () => getFlat({ userId, flatId }))
 

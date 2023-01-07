@@ -7,10 +7,14 @@ import { useEffect, useState, FC } from 'react';
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
+import { Session } from 'utils/types';
+
+interface FlatsProps {
+  session: Session
+}
 
 
-
-const Flats: FC = ({ session }) => {
+const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
 
   const [flats, setFlats] = useState([])
   const { isLoading, isError, error } = useQuery('flats', () => getFlats(session.user._id),  {onSuccess: setFlats})

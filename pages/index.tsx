@@ -6,6 +6,7 @@ import AuthLayout from '../components/AuthLayout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { GetStaticProps } from 'next'
+import { Session } from 'utils/types'
 
 const Guest: FC = () => {
   const { t } = useTranslation('index')
@@ -27,7 +28,11 @@ const Guest: FC = () => {
   )
 }
 
-const User: FC = ({ session, handleSignOut }) => {
+interface UserProps {
+  session: Session
+}
+
+const User: FC<UserProps> = ({ session }: UserProps) => {
   const { t } = useTranslation('index')
   return (
     <div className='container mx-auto text-center py-20'>

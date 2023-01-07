@@ -13,7 +13,6 @@ interface AptPageProps {
   id: string
 }
 
-
 /* Allows you to view apt card info and delete apt card*/
 const AptPage: FC<AptPageProps> = ({id}: AptPageProps) => {
 

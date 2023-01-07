@@ -7,9 +7,14 @@ import { getFlats } from '../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { GetServerSideProps } from 'next'
+import { Session } from 'utils/types';
+
+interface MapsProps {
+  session: Session
+}
 
 
-const Maps: FC = ({ session }) => {
+const Maps: FC<MapsProps> = ({ session }: MapsProps) => {
 
     const [selectedLocation, setSelectedLocation] = useState({});
     const [showPopup, setShowPopup] = useState(false);

@@ -15,8 +15,6 @@ const Pagination: FC<PaginationProps> = ({ items, pageSize, currentPage, onPageC
     if (Math.ceil(pageCount) === 1) return null;
     const pages = _.range(1, pageCount + 1);
 
-    console.log({ items, pageSize, currentPage, onPageChange })
-
     const pageWindow = []
 
     for (let i = currentPage - 3; i < pageCount; i++) {

@@ -6,9 +6,12 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react';
 import { GetServerSideProps } from 'next'
 
+interface EditAptProps {
+  id: string
+}
 
 
-const EditApt: FC = ({id}) => {
+const EditApt: FC<EditAptProps> = ({id}: EditAptProps) => {
   const router = useRouter()
 
   const { data: apt, error } = useQuery(['apts', id], () => getApt(id))

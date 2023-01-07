@@ -4,8 +4,14 @@ import Dashboard from '../../components/Dashboard'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react'
 import { GetServerSideProps } from 'next'
+import { Session } from 'utils/types'
 
-const NewFlat: FC = ({ userId, session }) => {
+interface NewFlatProps {
+  userId: string,
+  session: Session
+}
+
+const NewFlat: FC<NewFlatProps> = ({ userId, session }: NewFlatProps) => {
   const flatForm = {
     title: '',
     location: '',

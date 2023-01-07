@@ -8,9 +8,17 @@ import { getFlat, getApts, deleteFlat } from '../../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { GetServerSideProps } from 'next'
+import { Session } from 'utils/types'
+
+interface FlatPageProps {
+  session: Session,
+  userId: string,
+  flatId: string
+}
+
 
 /* Allows you to view apt card info and delete apt card*/
-const FlatPage: FC = ({session, userId, flatId}) => {
+const FlatPage: FC<FlatPageProps> = ({session, userId, flatId}: FlatPageProps) => {
 
   const {t} = useTranslation('flats')
 
