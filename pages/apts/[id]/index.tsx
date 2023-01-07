@@ -3,19 +3,25 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import AptBigCard from '../../../components/AptComponents/AptBigCard'
 import { getApt } from '../../../utils/ApiCalls'
-import { dehydrate, QueryClient, useQuery, useQueryClient } from 'react-query';
+import { dehydrate, QueryClient, useQuery, useQueryClient, UseQueryResult } from 'react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
+import { AptType } from 'utils/types'
+
+// Define props
+interface AptPageProps {
+  id: string
+}
 
 
 /* Allows you to view apt card info and delete apt card*/
-const AptPage: FC = ({id}) => {
+const AptPage: FC<AptPageProps> = ({id}: AptPageProps) => {
 
   const router = useRouter()
 
   const queryClient = useQueryClient()
   
-  const { data: apt } = useQuery(['apts', id], () => getApt(id))
+  const { data: apt, isLoading, isError, error }: UseQueryResult<AptType, Error> = useQuery<AptType, Error, AptType, Array<string>>(['apts', id], () => getApt(id))
 
 
   const [message, setMessage] = useState('')
@@ -32,12 +38,22 @@ const AptPage: FC = ({id}) => {
     }
   }
 
+  
+  if (isLoading) {
+    return <div>Učitava se</div>
+  }
+
+  if (isError) {
+    return <div>{error.message}</div>
+  }
+
+
   return (
 
     <div className="flex bg-blue-400">
       <div className="m-auto bg-slate-50 rounded-md w-3/5 mt-24 pt-16 flex justify-center">
 
-        <AptBigCard key={apt._id} apt={apt} handleDelete={handleDelete} />
+        {apt?._id ? <AptBigCard key={apt._id.toString()} apt={apt} handleDelete={handleDelete} /> : null}
 
 
         {message && <p>{message}</p>}
@@ -48,7 +64,7 @@ const AptPage: FC = ({id}) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
 
-  const id = params.id;
+  const id = params?.id;
 
   const queryClient = new QueryClient()
 

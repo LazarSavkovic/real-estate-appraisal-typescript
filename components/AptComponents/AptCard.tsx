@@ -1,8 +1,17 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
+import { AptType } from 'utils/types'
 
-const AptCard: FC = ({ apt }) => {
+
+// Define props
+interface AptCardProps {
+    apt: AptType
+  }
+
+
+
+const AptCard: FC<AptCardProps> = ({ apt }: AptCardProps) => {
     const {t} = useTranslation('apts')
 
     return (

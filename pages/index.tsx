@@ -72,11 +72,14 @@ const Home: FC = () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['index', 'common'])),
-      // Will be passed to the page component as props
-    },
+
+  if (locale) {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['index', 'common']))
+        // Will be passed to the page component as props
+      },
+    }
   }
 }
 

@@ -2,11 +2,19 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/react'
 import styles from '../styles/Dashboard.module.css'
-import { useEffect, useState, FC } from 'react'
+import { useEffect, useState, FC, ReactNode } from 'react'
 // import {motion} from 'framer-motion'
 import { useTranslation } from 'next-i18next'
+import { Session } from 'utils/types'
 
-const Dashboard: FC = ({ children, session, setSearchInput, searchInput }) => {
+interface DashboardProps {
+    children: ReactNode,
+    session: Session,
+    setSearchInput: Function,
+    searchInput: string
+}
+
+const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, searchInput }: DashboardProps ) => {
 
     const {t} = useTranslation('dashboard');
 
@@ -23,8 +31,6 @@ const Dashboard: FC = ({ children, session, setSearchInput, searchInput }) => {
         setSearchInput(e.target.value)
     }
 
-
-
     const getPlace = () => {
         switch (router.pathname) {
             case '/flats':
@@ -38,15 +44,6 @@ const Dashboard: FC = ({ children, session, setSearchInput, searchInput }) => {
         }
     }
 
-    useEffect(() => {
-        if (flat) {
-            session.flat = 'som sum'
-        } else {
-            delete session.flat
-        }
-
-
-    }, [flat]) 
 
     const variants = {
         open: { opacity: 1, y: 0 },

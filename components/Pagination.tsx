@@ -1,26 +1,35 @@
 import _ from "lodash";
 import { FC } from "react";
 
+interface PaginationProps {
+    items: number,
+    pageSize: number,
+    currentPage: number,
+    onPageChange: Function
+}
 
 
-const Pagination: FC = ({ items, pageSize, currentPage, onPageChange }) => {
+
+const Pagination: FC<PaginationProps> = ({ items, pageSize, currentPage, onPageChange }: PaginationProps) => {
     const pageCount = items / pageSize;
     if (Math.ceil(pageCount) === 1) return null;
     const pages = _.range(1, pageCount + 1);
 
+    console.log({ items, pageSize, currentPage, onPageChange })
+
     const pageWindow = []
 
-    for (let i = currentPage - 3; i < pageCount; i++){
-            if((i > 0) && (pageWindow.length < 7)){
-                pageWindow.push(i)
-            }
+    for (let i = currentPage - 3; i < pageCount; i++) {
+        if ((i > 0) && (pageWindow.length < 7)) {
+            pageWindow.push(i)
+        }
     }
     return (
         <>
             <nav className="isolate inline-flex -space-x-px rounded-md shadow-sm flex justify-center" aria-label="Pagination">
-            <a key={'Prethodna'}
-                                onClick={() => onPageChange(currentPage - 1)}
-                                style={{ cursor: "pointer" }}
+                <a key={'Prethodna'}
+                    onClick={() => onPageChange(currentPage - 1)}
+                    style={{ cursor: "pointer" }}
                     className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
                 >Prethodna
                 </a>
@@ -39,10 +48,10 @@ const Pagination: FC = ({ items, pageSize, currentPage, onPageChange }) => {
 
 
 
-                                <a
-                                key={'Sledeca'}
-                                onClick={() => onPageChange(currentPage + 1)}
-                                style={{ cursor: "pointer" }}
+                <a
+                    key={'Sledeca'}
+                    onClick={() => onPageChange(currentPage + 1)}
+                    style={{ cursor: "pointer" }}
 
                     className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
                 >Sledeca

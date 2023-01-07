@@ -1,8 +1,15 @@
-
 import Map, { Marker, Popup } from 'react-map-gl';
 import { useState, FC } from 'react'
+import { AptType } from 'utils/types';
 
-const FlatMaps: FC = ({ longitude, latitude, apts }) => {
+interface FlatMapsProps {
+    longitude: number,
+    latitude: number,
+    apts: AptType[]
+}
+
+
+const FlatMaps: FC<FlatMapsProps> = ({ longitude, latitude, apts }: FlatMapsProps) => {
 
     const [showPopup, setShowPopup] = useState(false);
 

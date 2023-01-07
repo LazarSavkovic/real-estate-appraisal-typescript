@@ -1,15 +1,25 @@
 import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
 import mongoose from 'mongoose'
-import { useMutation , useQueryClient} from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { postFlat, updateFlat } from '../../utils/ApiCalls'
 import { useTranslation } from 'next-i18next'
+import { FlatType } from 'utils/types'
 
 
-const FlatForm: FC = ({ userId, formId, flatForm, forNewFlat = true, justPredict = false }) => {
+// Define props
+interface FlatFormProps {
+  userId: string,
+  formId: string,
+  flatForm: FlatType,
+  forNewFlat: boolean,
+  justPredict: boolean
+}
 
-  const {t} = useTranslation('flats')
-  const {ft} = useTranslation('flatForm')
+const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = true, justPredict = false }: FlatFormProps) => {
+
+  const { t } = useTranslation('flats')
+  const { t: ft } = useTranslation('flatForm')
   const router = useRouter()
   const contentType = 'application/json'
   const [errors, setErrors] = useState({})
@@ -28,12 +38,12 @@ const FlatForm: FC = ({ userId, formId, flatForm, forNewFlat = true, justPredict
 
   const queryClient = useQueryClient()
 
-  
+
   const postFlatMutation = useMutation(postFlat, {
     onSuccess: (data) => {
       const updatedFlat = data.data.data;
       queryClient.invalidateQueries('flats')
-      queryClient.setQueryData(['flats', updatedFlat._id ], updatedFlat)
+      queryClient.setQueryData(['flats', updatedFlat._id], updatedFlat)
 
     }
   })
@@ -42,7 +52,7 @@ const FlatForm: FC = ({ userId, formId, flatForm, forNewFlat = true, justPredict
     onSuccess: (data) => {
       const newFlat = data.data.data;
       queryClient.invalidateQueries('flats')
-      queryClient.setQueryData(['flats', newFlat._id ], newFlat)
+      queryClient.setQueryData(['flats', newFlat._id], newFlat)
     }
   })
 
@@ -52,7 +62,7 @@ const FlatForm: FC = ({ userId, formId, flatForm, forNewFlat = true, justPredict
     const { id } = router.query
 
     try {
-      putFlatMutation.mutate({form, id})
+      putFlatMutation.mutate({ form, id })
 
       // Throw error with status code in case Fetch API req failed
       if (putFlatMutation.isError) {

@@ -2,8 +2,16 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
 // import { motion } from 'framer-motion'
+import { FlatType } from 'utils/types'
 
-const FlatCard: FC = ({ flat, predicted }) => {
+
+// Define props
+interface FlatCardProps {
+    flat: FlatType,
+    predicted: boolean
+  }
+
+const FlatCard: FC<FlatCardProps> = ({ flat, predicted }: FlatCardProps) => {
 
     const {t} = useTranslation('flats')
     return (

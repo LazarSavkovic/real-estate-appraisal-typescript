@@ -3,8 +3,19 @@ import FlatMaps from './FlatMaps'
 // import { motion } from 'framer-motion'
 import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
+import { FlatType } from 'utils/types'
+import { AptType } from 'utils/types'
 
-const FlatBigCard: FC = ({ flat, handleDelete, apts }) => {
+
+// Define props
+interface FlatBigCardProps {
+    flat: FlatType,
+    handleDelete: Function,
+    apts: AptType[]
+
+  }
+
+const FlatBigCard: FC<FlatBigCardProps> = ({ flat, handleDelete, apts }: FlatBigCardProps) => {
 
     const {t} = useTranslation('flats')
     return (

@@ -3,8 +3,18 @@ import { useRouter } from 'next/router'
 import { postApt, updateApt } from '../../utils/ApiCalls'
 import { useMutation, QueryClient } from 'react-query'
 import { useTranslation } from 'next-i18next'
+import { AptType } from 'utils/types'
 
-const AptForm: FC = ({ formId, aptForm, forNewApt = true }) => {
+
+// Define props
+interface AptFormProps {
+  aptForm: AptType,
+  formId: string,
+  forNewApt: boolean
+  }
+
+
+const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFormProps) => {
   
   const {t} = useTranslation('apts')
 

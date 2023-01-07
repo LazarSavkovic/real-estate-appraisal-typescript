@@ -1,5 +1,11 @@
-import React from 'react'
-import { FC } from 'react'
+import React, { MouseEventHandler } from 'react'
+import { FC, ReactNode } from 'react'
+
+// interface ButtonProps { 
+//   function: MouseEventHandler,
+//   children: ReactNode
+// }
+
 
 const Button: FC = (props) => {
   return (

@@ -57,3 +57,13 @@ export interface UserType {
   password: string,
   _id?: mongoose.Schema.Types.ObjectId,
 }
+
+export interface Session {
+  expires: string,
+  user: {
+    email: string,
+    image: string,
+    name: string,
+    _id: string
+  }
+}

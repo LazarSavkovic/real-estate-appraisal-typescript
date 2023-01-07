@@ -1,7 +1,11 @@
 import Nav from './Nav'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
-const Layout: FC = ({ children }) => {
+interface LayoutProps {
+    children: ReactNode
+}
+
+const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => {
     return (
         <div>
             <Nav/>

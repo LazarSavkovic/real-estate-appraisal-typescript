@@ -38,7 +38,7 @@ const Index: FC = () => {
   }
 
   if (isError) {
-    return <div>{error}</div>
+    return <div>{error.message}</div>
   }
 
 

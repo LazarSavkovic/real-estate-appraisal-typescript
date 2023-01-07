@@ -3,9 +3,17 @@ import Button from '../Button'
 import AptMaps from './AptMaps'
 import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
+import { AptType } from 'utils/types'
 
 
-const AptBigCard: FC = ({ apt, handleDelete }) => {
+// Define props
+interface AptBigCardProps {
+    apt: AptType,
+    handleDelete: Function
+  }
+  
+
+const AptBigCard: FC<AptBigCardProps> = ({ apt, handleDelete }: AptBigCardProps) => {
 
     const {t} = useTranslation('apts')
 
