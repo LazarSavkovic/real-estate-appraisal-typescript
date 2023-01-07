@@ -82,15 +82,15 @@ const Index: FC = () => {
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 
-  // const queryClient = new QueryClient()
+  const queryClient = new QueryClient()
   console.log(locale)
 
-  // await queryClient.prefetchQuery('apts', getApts)
+  await queryClient.prefetchQuery('apts', getApts)
 
   if (locale) {
     return {
       props: {
-        // dehydratedState: dehydrate(queryClient),
+        dehydratedState: dehydrate(queryClient),
         ...(await serverSideTranslations(locale, ['common', 'apts'])),
         // Will be passed to the page component as props
       },
