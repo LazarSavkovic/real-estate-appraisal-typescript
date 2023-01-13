@@ -55,7 +55,7 @@ const FlatMaps: FC<FlatMapsProps> = ({ longitude, latitude, apts }: FlatMapsProp
             </Popup>}
 
         {apts && apts.map(apt => (
-            <div key={apt._id}>
+            <div key={apt._id?.toString()}>
                 <Marker
                     longitude={apt.long}
                     latitude={apt.lat}

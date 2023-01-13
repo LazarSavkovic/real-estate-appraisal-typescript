@@ -1,5 +1,6 @@
-import Map, { Source, Layer } from 'react-map-gl';
+import Map, { Source, Layer, LayerProps } from 'react-map-gl';
 import { useState, FC } from 'react'
+import { FeatureCollection } from "geojson";
 
 interface AptMapsProps {
     longitude: number,
@@ -8,14 +9,15 @@ interface AptMapsProps {
 
 const AptMaps: FC<AptMapsProps> = ({ longitude, latitude }: AptMapsProps) => {
 
-    const geojson = {
+    const geojson: FeatureCollection = {
         type: 'FeatureCollection',
+
         features: [
-            { type: 'Feature', geometry: { type: 'Point', coordinates: [longitude, latitude] } }
+            { type: 'Feature', properties: {},geometry: { type: 'Point', coordinates: [longitude, latitude] } }
         ]
     };
 
-    const layerStyle = {
+    const layerStyle: LayerProps = {
         id: 'point',
         type: 'circle',
         paint: {

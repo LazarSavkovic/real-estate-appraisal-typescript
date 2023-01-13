@@ -1,10 +1,10 @@
-import { useState, FC } from 'react'
+import React, { useState, FC } from 'react'
 import { useRouter } from 'next/router'
 import mongoose from 'mongoose'
 import { useMutation, useQueryClient } from 'react-query'
 import { postFlat, updateFlat } from '../../utils/ApiCalls'
 import { useTranslation } from 'next-i18next'
-import { FlatType } from 'utils/types'
+import { FlatType, FlatFormErrors } from 'utils/types'
 
 
 // Define props
@@ -95,7 +95,13 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
         const flat = result.data;
 
-        var oldFlats = JSON.parse(localStorage.getItem('flatsArray')) || [];
+        const flatsArrayString = localStorage.getItem('flatsArray')
+        let oldFlats: FlatType[]
+        if (flatsArrayString) {
+            oldFlats = JSON.parse(flatsArrayString);
+        } else {
+             oldFlats =  [];
+        }
 
         oldFlats.push(flat);
 
@@ -103,7 +109,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
         // Throw error with status code in case Fetch API req failed
         if (!res.ok) {
-          throw new Error(res.status)
+          throw new Error(res.status.toString())
         }
 
 
@@ -133,7 +139,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const value = target.value
     const name = target.name
@@ -146,7 +152,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
-    let err = {}
+    let err: FlatFormErrors = {}
     if (!form.title) err.title = 'title is missing'
     if (!form.location) err.location = 'address is missing'
     if (!form.short_description) err.short_description = 'description is missing'
@@ -157,7 +163,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const errs = formValidate()
     if (Object.keys(errs).length === 0) {

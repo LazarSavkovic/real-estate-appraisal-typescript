@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/react'
 import styles from '../styles/Dashboard.module.css'
-import { useEffect, useState, FC, ReactNode } from 'react'
+import React, { useEffect, useState, FC, ReactNode } from 'react'
 import { useTranslation } from 'next-i18next'
 import { Session } from 'next-auth'
 
@@ -26,7 +26,7 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
         signOut()
     }
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInput(e.target.value)
     }
 

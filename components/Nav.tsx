@@ -22,7 +22,7 @@ const Nav: FC = () => {
     }
     const router = useRouter();
     const { locale, locales } = router;
-    const oppositeLocale = locales.filter((loc => loc !== locale))[0]
+    const oppositeLocale = locales!.filter((loc => loc !== locale))[0]
 
     const handleLanguageChange = () => {
         router.push(router.asPath, undefined, { locale: oppositeLocale })

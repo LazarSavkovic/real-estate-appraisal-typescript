@@ -1,9 +1,9 @@
-import { useState, FC } from 'react'
+import React, { useState, FC, FormEvent } from 'react'
 import { useRouter } from 'next/router'
 import { postApt, updateApt } from '../../utils/ApiCalls'
 import { useMutation, useQueryClient } from 'react-query'
 import { useTranslation } from 'next-i18next'
-import { AptType } from 'utils/types'
+import { AptType, AptFormErrors } from 'utils/types'
 
 
 // Define props
@@ -54,8 +54,14 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
 
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form: AptType) => {
-    const { id } = router.query;
-    if (id) {
+    let id: string;
+    if (router.query.id) {
+      if (typeof router.query.id === 'string') {
+        id = router.query.id
+      } else {
+        id = router.query.id[0]
+      }
+
       try {
         if (form.floor) {
           putAptMutation.mutate({ form, id })
@@ -81,8 +87,6 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
         setMessage('Failed to update apt')
       }
     }
-
-
   }
 
   /* The POST method adds a new entry in the mongodb database. */
@@ -103,7 +107,7 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const value = target.value
     const name = target.name
@@ -116,20 +120,20 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
 
   /* Makes sure pet info is filled for pet name, owner name, species, and image url*/
   const formValidate = () => {
-    let err = {}
+    let err: AptFormErrors = {};
     if (!form.title) err.title = 'title is missing'
     if (!form.price) err.price = 'price is missing'
     if (!form.short_description) err.short_description = 'description is missing'
     if (!form.sq_mt) err.sq_mt = 'area is missing'
     if (!form.rooms) err.rooms = 'rooms is missing'
-    if (aptForm.floor && !form.floor) err.floor = 'floor is missing'
+    if (aptForm?.floor && !form.floor) err.floor = 'floor is missing'
     if (!form.lat) err.lat = 'latitude is missing'
     if (!form.long) err.long = 'longitude is missing'
     return err
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const errs = formValidate()
     if (Object.keys(errs).length === 0) {

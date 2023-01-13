@@ -1,3 +1,4 @@
+import { formToJSON } from 'axios'
 import mongoose from 'mongoose'
 
 
@@ -66,4 +67,27 @@ export interface Session {
     name: string,
     _id: string
   }
+}
+
+
+// forms 
+
+export interface AptFormErrors {
+  title? : string,
+  price? : string,
+  short_description?:string,
+  sq_mt?: string,
+  rooms?: string,
+  floor?: string,
+  lat?: string,
+  long?: string
+}
+
+export interface FlatFormErrors {
+  title? : string,
+  location? : string,
+  short_description?:string,
+  sq_mt?: string,
+  rooms?: string,
+  floor?: string
 }
