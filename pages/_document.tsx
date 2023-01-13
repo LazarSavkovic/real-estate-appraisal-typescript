@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 
 export default function Document() {
   return (
@@ -11,6 +12,8 @@ export default function Document() {
 
         <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
       </Head>
+ 
+      <Script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js' />
       <body>
         <Main />
         <NextScript />

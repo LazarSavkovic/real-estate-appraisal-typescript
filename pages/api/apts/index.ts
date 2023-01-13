@@ -16,11 +16,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     GET: async (req: NextApiRequest, res: NextApiResponse<Array<AptType> | void>) => {
       await connect() // connect to database
       try {
-        const apts = await Apt.find({})
-        // console.log(apts)
-        res.json(apts)
-      } catch(e) {
-        res.status(400).json({ e })
+        const { limit } = req.query;
+        let apts;
+        limit ? apts = await Apt.find({}).limit(limit) : apts = await Apt.find({});
+        res.status(200).json(apts)
+      } catch (error) {
+        res.status(400).send(error.message)
       }
 
     },

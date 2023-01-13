@@ -1,36 +1,36 @@
 import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
 import { postApt, updateApt } from '../../utils/ApiCalls'
-import { useMutation, QueryClient } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 import { useTranslation } from 'next-i18next'
 import { AptType } from 'utils/types'
 
 
 // Define props
 interface AptFormProps {
-  aptForm: AptType,
+  aptForm?: AptType,
   formId: string,
-  forNewApt: boolean
-  }
+  forNewApt?: boolean
+}
 
 
 const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFormProps) => {
-  
-  const {t} = useTranslation('apts')
+
+  const { t } = useTranslation('apts')
 
   const router = useRouter()
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
 
   const [form, setForm] = useState({
-    title: aptForm.title,
-    price: aptForm.price,
-    short_description: aptForm.short_description,
-    sq_mt: aptForm.sq_mt,
-    rooms: aptForm.rooms,
-    floor: aptForm.floor,
-    lat: aptForm.lat,
-    long: aptForm.long,
+    title: (aptForm?.title || ''),
+    price: (aptForm?.price || 0),
+    short_description: (aptForm?.short_description || ''),
+    sq_mt: (aptForm?.sq_mt || 0),
+    rooms: (aptForm?.rooms || 0),
+    floor: (aptForm?.floor || 0),
+    lat: (aptForm?.lat || 0),
+    long: (aptForm?.long || 0),
   })
 
 
@@ -38,53 +38,55 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
 
   const postAptMutation = useMutation(postApt, {
     onSuccess: (data) => {
-      const newApt = data.data.data;
+      const newApt = data;
       queryClient.invalidateQueries('apts')
-      queryClient.setQueryData(['apts', newApt._id ], newApt)
+      queryClient.setQueryData(['apts', newApt._id], newApt)
     }
   })
 
   const putAptMutation = useMutation(updateApt, {
     onSuccess: (data) => {
-      const updatedApt = data.data.data;
+      const updatedApt = data;
       queryClient.invalidateQueries('apts')
-      queryClient.setQueryData(['apts', updatedApt._id ], updatedApt)
+      queryClient.setQueryData(['apts', updatedApt._id], updatedApt)
     }
   })
 
   /* The PUT method edits an existing entry in the mongodb database. */
-  const putData = async (form) => {
-    const { id } = router.query
+  const putData = async (form: AptType) => {
+    const { id } = router.query;
+    if (id) {
+      try {
+        if (form.floor) {
+          putAptMutation.mutate({ form, id })
+        } else {
+          const noFloorForm = form;
+          delete noFloorForm.floor;
+          putAptMutation.mutate({ form: noFloorForm, id })
 
-    try {
+        }
 
-      if (form.floor) {
-        putAptMutation.mutate({ form, id })
-      } else {
-        const noFloorForm = form;
-        delete noFloorForm.floor;
-        putAptMutation.mutate({ form: noFloorForm, id })
 
+        // Throw error with status code in case Fetch API req failed
+        if (putAptMutation.isError) {
+          console.log('some error')
+          throw new Error(putAptMutation.error.message)
+
+        }
+
+        console.log('about to reroute')
+
+        router.push('/')
+      } catch (error) {
+        setMessage('Failed to update apt')
       }
-
-
-      // Throw error with status code in case Fetch API req failed
-      if (putAptMutation.isError) {
-        console.log('some error')
-        throw new Error(putAptMutation.error.message)
-
-      }
-
-      console.log('about to reroute')
-
-      router.push('/')
-    } catch (error) {
-      setMessage('Failed to update apt')
     }
+
+
   }
 
   /* The POST method adds a new entry in the mongodb database. */
-  const postData = async (form) => {
+  const postData = async (form: AptType) => {
     try {
 
       postAptMutation.mutate(form)
@@ -145,7 +147,7 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
           <input
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
-            maxLength="40"
+            maxLength={40}
             name="title"
             value={form.title}
             onChange={handleChange}
@@ -157,7 +159,7 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
           <input
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="number"
-            maxLength="10"
+            maxLength={10}
             name="price"
             value={form.price}
             onChange={handleChange}
@@ -169,7 +171,7 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
           <input
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
-            maxLength="50"
+            maxLength={50}
             name="short_description"
             value={form.short_description}
             onChange={handleChange}
@@ -227,7 +229,7 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
           />
         </div>
         <button type="submit" className="text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
-        {t('submit')}
+          {t('submit')}
         </button>
       </form>
       <p>{message}</p>

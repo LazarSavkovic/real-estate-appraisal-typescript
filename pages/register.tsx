@@ -127,11 +127,17 @@ const Register: FC = () => {
 
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-    return {
-      props: {
-        ...(await serverSideTranslations(locale, ['register', 'common'])),
-        // Will be passed to the page component as props
-      },
+    if(locale) {
+        return {
+            props: {
+              ...(await serverSideTranslations(locale, ['register', 'common'])),
+              // Will be passed to the page component as props
+            },
+          }
+    } else {
+        return {
+            props: {}
+          }
     }
   }
   

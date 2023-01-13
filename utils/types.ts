@@ -24,19 +24,19 @@ export interface AptType {
   subtitle_places?: string[],
   features?: string[],
   sq_mt: number,
-  floor: number,
+  floor?: number,
   rooms: number,
   short_description: string,
   title: string,
   date?: string,
   lat: number,
   long: number,
-  _id?: mongoose.Schema.Types.ObjectId,
+  _id?: mongoose.Types.ObjectId,
 }
 
 export interface FlatType {
-  author?: mongoose.Schema.Types.ObjectId,
-  _id?: mongoose.Schema.Types.ObjectId,
+  author?: mongoose.Types.ObjectId,
+  _id?: mongoose.Types.ObjectId,
   location: string,
   value?: number,
   image?: string,
@@ -46,7 +46,7 @@ export interface FlatType {
   short_description: string,
   title: string,
   date?: string,
-  geometry: {
+  geometry?: {
     coordinates: number[]
   }
 }

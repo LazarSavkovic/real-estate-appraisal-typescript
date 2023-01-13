@@ -1,4 +1,3 @@
-
 import Map, { Source, Layer } from 'react-map-gl';
 import { useState, FC } from 'react'
 

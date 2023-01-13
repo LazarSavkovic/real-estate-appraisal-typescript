@@ -7,7 +7,7 @@ import { getFlats } from '../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { dehydrate, QueryClient, useQuery } from 'react-query';
 import { GetServerSideProps } from 'next'
-import { Session } from 'utils/types';
+import { Session } from 'next-auth'
 
 interface MapsProps {
   session: Session

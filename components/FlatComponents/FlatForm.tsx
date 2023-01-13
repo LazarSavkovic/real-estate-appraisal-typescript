@@ -9,9 +9,9 @@ import { FlatType } from 'utils/types'
 
 // Define props
 interface FlatFormProps {
-  userId: string,
+  userId?: string,
   formId: string,
-  flatForm: FlatType,
+  flatForm?: FlatType,
   forNewFlat: boolean,
   justPredict: boolean
 }
@@ -24,15 +24,15 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
   const contentType = 'application/json'
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
-  console.log(userId)
+  console.log("user Id je", userId)
 
   const [form, setForm] = useState({
-    title: flatForm.title,
-    location: flatForm.location,
-    short_description: flatForm.short_description,
-    sq_mt: flatForm.sq_mt,
-    rooms: flatForm.rooms,
-    floor: flatForm.floor
+    title: (flatForm?.title || ''),
+    location: (flatForm?.location || ''),
+    short_description: (flatForm?.short_description || ''),
+    sq_mt: (flatForm?.sq_mt || 0),
+    rooms: (flatForm?.rooms || 0),
+    floor: (flatForm?.floor || 0)
   })
 
 
@@ -41,7 +41,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
   const postFlatMutation = useMutation(postFlat, {
     onSuccess: (data) => {
-      const updatedFlat = data.data.data;
+      const updatedFlat: FlatType = data;
       queryClient.invalidateQueries('flats')
       queryClient.setQueryData(['flats', updatedFlat._id], updatedFlat)
 
@@ -50,7 +50,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
   const putFlatMutation = useMutation(updateFlat, {
     onSuccess: (data) => {
-      const newFlat = data.data.data;
+      const newFlat: FlatType = data;
       queryClient.invalidateQueries('flats')
       queryClient.setQueryData(['flats', newFlat._id], newFlat)
     }
@@ -58,9 +58,9 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
 
   /* The PUT method edits an existing entry in the mongodb database. */
-  const putData = async (form) => {
+  const putData = async (form: FlatType) => {
     const { id } = router.query
-
+   if (typeof id === 'string') {
     try {
       putFlatMutation.mutate({ form, id })
 
@@ -73,10 +73,12 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     } catch (error) {
       setMessage('Failed to update flat')
     }
+   }
+
   }
 
   /* The POST method adds a new entry in the mongodb database. */
-  const postData = async (form) => {
+  const postData = async (form: FlatType) => {
 
     if (justPredict) {
       try {
@@ -113,9 +115,10 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     } else {
 
       const formWithAuthor = form;
-      formWithAuthor.author = mongoose.Types.ObjectId(userId)
-
+        formWithAuthor.author = new mongoose.Types.ObjectId(userId)
+            
       try {
+        
         postFlatMutation.mutate(formWithAuthor)
 
         // Throw error with status code in case Fetch API req failed
@@ -172,7 +175,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
           <input
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
-            maxLength="35"
+            maxLength={35}
             name="title"
             value={form.title}
             onChange={handleChange}
@@ -184,7 +187,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
           <input
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
-            maxLength="50"
+            maxLength={50}
             name="location"
             value={form.location}
             onChange={handleChange}
@@ -197,7 +200,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
           <input
             className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
-            maxLength="30"
+            maxLength={30}
             name="short_description"
             value={form.short_description}
             onChange={handleChange}

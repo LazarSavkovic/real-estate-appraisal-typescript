@@ -11,21 +11,41 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const catcher = (error: Error) => res.status(400).json({ error })
 
   // GRAB ID FROM req.query (where next stores params)
-  const id: string = req.query.id as string
+  const {
+    query: { id, userid },
+  } = req
 
   // Potential Responses for /todos/:id
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
     GET: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
-      await connect() // connect to database
-      res.json(await Flat.findById(id).catch(catcher))
+      try {
+        await connect() // connect to database
+        const flat = await Flat.findOne({_id: id, author: userid})
+        if (!flat) {
+          return res.status(400).json({ success: false })
+        }
+        res.status(200).json(flat)
+      } catch (error) {
+        res.status(400).send(error.message)
+      }
     },
     // RESPONSE PUT REQUESTS
     PUT: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
-      await connect() // connect to database
-      res.json(
-        await Flat.findByIdAndUpdate(id, req.body, { new: true }).catch(catcher)
-      )
+      
+      try {
+        await connect() // connect to database
+        const flat = await Flat.findByIdAndUpdate(id, req.body, {
+          new: true,
+          runValidators: true,
+        })
+        if (!flat) {
+          return res.status(400).json({ success: false })
+        }
+        res.status(200).json(flat)
+      } catch (error) {
+        res.status(400).send(error.message)
+      }
     },
     // RESPONSE FOR DELETE REQUESTS
     DELETE: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {

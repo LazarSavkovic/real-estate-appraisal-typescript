@@ -3,7 +3,6 @@ import Button from './Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
-// import { motion } from 'framer-motion'
 import { useTranslation } from 'next-i18next'
 
 
@@ -37,13 +36,6 @@ const Nav: FC = () => {
     }
     return (
         <div
-            // initial={{ y: 25, opacity: 0 }}
-            // animate={{ y: 0, opacity: 1 }}
-            // transition={{
-            //     delay: 0.4,
-            //     duration: 0.75
-            // }}
-
             className='shadow-md w-full fixed top-0 left-0 z-50'>
             <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
                 <Link href='/' legacyBehavior><a className='font-bold text-l cursor-pointer flex items-center font-[Poppins] text-gray-800'>

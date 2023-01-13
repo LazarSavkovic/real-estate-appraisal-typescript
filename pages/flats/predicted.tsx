@@ -4,22 +4,30 @@ import FlatCard from '../../components/FlatComponents/FlatCard'
 import { useEffect, useState, FC } from 'react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
+import { FlatType } from 'utils/types'
 
 
 const PredictedFlats: FC = () => {
 
-    const [flats, setFlats] = useState([])
+    const [flats, setFlats] = useState<FlatType[]>([])
 
     useEffect(() => {
-        const oldFlats = JSON.parse(localStorage.getItem('flatsArray')) || [];
+        const flatsArrayString = localStorage.getItem('flatsArray')
+        let oldFlats: FlatType[]
+        if (flatsArrayString) {
+            oldFlats = JSON.parse(flatsArrayString);
+        } else {
+             oldFlats =  [];
+        }
         setFlats([...oldFlats])
     }, [])
+
     return (
         <div className="container mx-auto my-28 w-3/4" >
             <div className='grid grid-cols-1'>
                 <div className={styles.container}>
                     {flats.map((flat) => (
-                        <FlatCard key={flat._id} flat={flat} predicted={true}/>
+                        <FlatCard key={flat._id?.toString()} flat={flat} predicted={true}/>
                     ))}
                 </div>
 

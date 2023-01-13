@@ -8,7 +8,7 @@ import { getFlat, getApts, deleteFlat } from '../../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { GetServerSideProps } from 'next'
-import { Session } from 'utils/types'
+import { Session } from 'next-auth'
 
 interface FlatPageProps {
   session: Session,

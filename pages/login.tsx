@@ -9,7 +9,6 @@ import { signIn, signOut } from 'next-auth/react'
 import { useFormik } from 'formik'
 import { loginValidate } from '../utils/validate'
 import { useRouter } from 'next/router'
-// import { motion } from 'framer-motion'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { GetStaticProps } from 'next'
@@ -36,7 +35,7 @@ const Login: FC = () => {
             callbackUrl: '/'
         })
 
-        if (status.ok) router.push(status.url)
+        if (status?.ok && status.url ) router.push(status.url)
     }
 
     async function handleGoogleSignIn() {
@@ -49,14 +48,6 @@ const Login: FC = () => {
                 <title>{t('log in')}</title>
             </Head>
             <section
-                // initial={{ opacity: 0, scale: 0.7 }}
-                // animate={{ opacity: 1, scale: 1 }}
-                // exit={{ opacity: 0, scale: 0.7 }}
-                // transition={{
-                //     duration: 0.5,
-                //     delay: 0.3,
-                //     ease: [0, 0.71, 0.2, 1.01]
-                // }}
                 className='w-3/4 mx-auto flex flex-col gap-5'>
                 <div className='title'>
                     <h1 className='text-gray-800 text-2xl font-bold py-2 tracking-wider'>{t('log in')}</h1></div>
@@ -89,10 +80,10 @@ const Login: FC = () => {
                     {t('log in')}
                     </button>
                     <button type='button' onClick={handleGoogleSignIn} className={styles.button_custom}>
-                    {t('log in with google')}<Image src='/images/google.svg' width='20' height='20'></Image>
+                    {t('log in with google')}<Image src='/images/google.svg' alt='google.svg' width='20' height='20'></Image>
                     </button>
                     <button type='button' className={styles.button_custom}>
-                    {t('log in with github')} <Image src='/images/github.svg' width='25' height='25'></Image>
+                    {t('log in with github')} <Image src='/images/github.svg'  alt='github.svg' width='25' height='25'></Image>
                     </button>
                 </form>
                 <p className='text-center text-gray-400'>
@@ -106,12 +97,19 @@ const Login: FC = () => {
 
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-    return {
-      props: {
-        ...(await serverSideTranslations(locale, ['login', 'common'])),
-        // Will be passed to the page component as props
-      },
+    if(locale){
+        return {
+            props: {
+              ...(await serverSideTranslations(locale, ['login', 'common'])),
+              // Will be passed to the page component as props
+            },
+          }
+    } else {
+        return {
+            props: {}
+          }
     }
+
   }
   
   

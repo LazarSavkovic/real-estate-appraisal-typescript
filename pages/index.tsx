@@ -6,7 +6,7 @@ import AuthLayout from '../components/AuthLayout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { GetStaticProps } from 'next'
-import { Session } from 'utils/types'
+import { Session } from 'next-auth'
 
 const Guest: FC = () => {
   const { t } = useTranslation('index')
@@ -14,7 +14,7 @@ const Guest: FC = () => {
     <div className='container mx-auto text-center py-20'>
       <h3 className='text-3xl font-bold py-5'>
         <span className='text-3xl text-indigo-600 mr-1 pt-2'>
-          {/* <ion-icon name="logo-ionic"></ion-icon> */}
+          <ion-icon name="logo-ionic"></ion-icon>
         </span>
         {t("real estate appraisal")}
       </h3>
@@ -34,6 +34,7 @@ interface UserProps {
 
 const User: FC<UserProps> = ({ session }: UserProps) => {
   const { t } = useTranslation('index')
+
   return (
     <div className='container mx-auto text-center py-20'>
       <h3 className='text-3xl font-bold py-5'>
@@ -43,10 +44,10 @@ const User: FC<UserProps> = ({ session }: UserProps) => {
         {t("real estate appraisal")}
       </h3>
       <div className='details'>
-        {<h5>{session.user.name}</h5> ||
-          <h5>{session.user.email}</h5>}
+        {session.user?.name && <h5>{session.user.name}</h5> ||
+          <h5>{session.user?.email}</h5>}
 
-        <img src={session.user.image} alt="" className="w-16 h-16 m-auto rounded-full object-cover lg:w-16 lg:h-16 inline" />
+        {session.user?.image && <img src={session.user?.image} alt="" className="w-16 h-16 m-auto rounded-full object-cover lg:w-16 lg:h-16 inline" />}
       </div>
       <div className='flex justify-center'>
         <Link href='/flats/new' legacyBehavior><a className='hover:scale-105 focus:scale-95 transition-all mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("new property")}</a></Link>
@@ -70,7 +71,7 @@ const Home: FC = () => {
   return (
     <AuthLayout>
       <div className={styles.container}>
-        {session ? User({ session, handleSignOut }) : Guest()}
+        {session ? User({ session }) : Guest()}
       </div>
     </AuthLayout>
   )

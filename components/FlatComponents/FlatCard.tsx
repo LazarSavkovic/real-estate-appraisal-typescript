@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import { FC } from 'react'
-// import { motion } from 'framer-motion'
 import { FlatType } from 'utils/types'
 
 
@@ -16,11 +15,6 @@ const FlatCard: FC<FlatCardProps> = ({ flat, predicted }: FlatCardProps) => {
     const {t} = useTranslation('flats')
     return (
         <div 
-        // animate={{
-        //     scale: [1, 2, 2, 1, 1],
-        //     rotate: [0, 0, 270, 270, 0],
-        //     borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-        // }}
             className="max-w-lg bg-white rounded-lg border w-[100%] md:w-[80%] xl:w-3/4 border-gray-200 shadow-md m-5">
             {flat.image && <a href="#">
                 <img className="rounded-t-lg" src={flat.image} alt={flat.title} />

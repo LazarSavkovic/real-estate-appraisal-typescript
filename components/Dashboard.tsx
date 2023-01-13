@@ -3,9 +3,8 @@ import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/react'
 import styles from '../styles/Dashboard.module.css'
 import { useEffect, useState, FC, ReactNode } from 'react'
-// import {motion} from 'framer-motion'
 import { useTranslation } from 'next-i18next'
-import { Session } from 'utils/types'
+import { Session } from 'next-auth'
 
 interface DashboardProps {
     children: ReactNode,

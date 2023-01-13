@@ -50,7 +50,7 @@ export const getApt = async (id: string): Promise<AptType> => {
 export const postApt = async (form: AptType): Promise<AptType> => {
 
     try {
-        const { data: newApt, status } = await axios.post('/api/apts', form)
+        const { data: newApt, status } = await axios.post<AptType>('/api/apts', form)
         // console.log(data)
         console.log("response status is", status)
         return newApt
@@ -71,7 +71,7 @@ export const postApt = async (form: AptType): Promise<AptType> => {
 export const updateApt = async ({ form, id }: { form: AptType, id: string }): Promise<AptType> => {
 
     try {
-        const { data: updatedApt, status } = await axios.put(`/api/apts/${id}`, form)
+        const { data: updatedApt, status } = await axios.put<AptType>(`/api/apts/${id}`, form)
         // console.log(data)
         console.log("response status is", status)
         return updatedApt
@@ -88,7 +88,7 @@ export const updateApt = async ({ form, id }: { form: AptType, id: string }): Pr
 
 export const deleteApt = async (id: string): Promise<AptType> => {
     try {
-        const { data: deletedApt, status } = await axios.delete(`/api/apts/${id}`)
+        const { data: deletedApt, status } = await axios.delete<AptType>(`/api/apts/${id}`)
         // console.log(data)
         console.log("response status is", status)
         return deletedApt
@@ -111,7 +111,7 @@ export const deleteApt = async (id: string): Promise<AptType> => {
 
 export const getFlats = async (userId: string): Promise<FlatType[]> => {
     try {
-        const { data: flats, status } = await axios.get(`/api/flats?id=${userId}`)
+        const { data: flats, status } = await axios.get<FlatType[]>(`/api/flats?id=${userId}`)
         // console.log(data)
         console.log("response status is", status)
         return flats
@@ -126,9 +126,9 @@ export const getFlats = async (userId: string): Promise<FlatType[]> => {
     }
 }
 
-export const getFlat = async ({ userId, flatId }: {userId: string, flatId: string}): Promise<FlatType[]> => {
+export const getFlat = async ({ userId, flatId }: {userId: string, flatId: string}): Promise<FlatType> => {
     try {
-        const { data: flat, status } = await axios.get(`/api/flats/${flatId}?userid=${userId}`)
+        const { data: flat, status } = await axios.get<FlatType>(`/api/flats/${flatId}?userid=${userId}`)
         // console.log(data)
         console.log("response status is", status)
         return flat
@@ -144,9 +144,9 @@ export const getFlat = async ({ userId, flatId }: {userId: string, flatId: strin
 }
 
 
-export const postFlat = async (formWithAuthor: FlatType): Promise<FlatType[]> => {
+export const postFlat = async (formWithAuthor: FlatType): Promise<FlatType> => {
     try {
-        const { data: newFlat, status } =  await axios.post('/api/flats', formWithAuthor)
+        const { data: newFlat, status } =  await axios.post<FlatType>('/api/flats', formWithAuthor)
         // console.log(data)
         console.log("response status is", status)
         return newFlat
@@ -162,9 +162,9 @@ export const postFlat = async (formWithAuthor: FlatType): Promise<FlatType[]> =>
 }
 
 
-export const updateFlat = async ({ form, id }: { form: FlatType, id: string }): Promise<FlatType[]>  => {
+export const updateFlat = async ({ form, id }: { form: FlatType, id: string }): Promise<FlatType>  => {
     try {
-        const { data: updatedFlat, status } = await axios.put(`/api/flats/${id}`, form)
+        const { data: updatedFlat, status } = await axios.put<FlatType>(`/api/flats/${id}`, form)
         // console.log(data)
         console.log("response status is", status)
         return updatedFlat
@@ -179,11 +179,20 @@ export const updateFlat = async ({ form, id }: { form: FlatType, id: string }): 
     }
 }
 
-export const deleteFlat = async (id: string) => {
-
-    const res = await axios.delete(`/api/flats/${id}`)
-
-    return res
-
+export const deleteFlat = async (id: string): Promise<FlatType> => {
+    try {
+        const { data: deletedFlat, status } = await axios.delete<FlatType>(`/api/flats/${id}`)
+        // console.log(data)
+        console.log("response status is", status)
+        return deletedFlat
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log('error message: ', error.message);
+            throw Error(error.message)
+        } else {
+            console.log('unexpected error: ', error);
+            throw Error("An unexpected error occurred");
+        }
+    }
 }
 

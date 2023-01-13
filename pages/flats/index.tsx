@@ -7,7 +7,7 @@ import { useEffect, useState, FC } from 'react';
 import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
-import { Session } from 'utils/types';
+import { Session } from 'next-auth'
 
 interface FlatsProps {
   session: Session

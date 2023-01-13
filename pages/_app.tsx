@@ -7,6 +7,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 
 const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
@@ -16,6 +17,8 @@ const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
 
   return (
 
+    <>
+    <Script  src="https://unpkg.com/ionicons@latest/dist/ionicons.js" />
     <SessionProvider session={pageProps.session}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
@@ -26,6 +29,7 @@ const App: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ SessionProvider>
+    </>
   )
 }
 

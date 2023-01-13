@@ -2,14 +2,14 @@ import Link from 'next/link'
 import Button from '../Button'
 import AptMaps from './AptMaps'
 import { useTranslation } from 'next-i18next'
-import { FC } from 'react'
+import { FC, MouseEventHandler } from 'react'
 import { AptType } from 'utils/types'
 
 
 // Define props
 interface AptBigCardProps {
     apt: AptType,
-    handleDelete: Function
+    handleDelete: MouseEventHandler
   }
   
 
