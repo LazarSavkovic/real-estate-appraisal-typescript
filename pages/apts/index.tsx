@@ -17,7 +17,7 @@ const Index: FC = () => {
 
   const [posts, setPosts] = useState<AptType[]>([]);
 
-  const { isLoading, isError, error }: UseQueryResult<AptType[], Error> = useQuery<AptType[], Error, AptType[], string>('apts', getApts, { onSuccess: setPosts })
+  const { isLoading, isError, error }: UseQueryResult<AptType[], Error> = useQuery<AptType[], Error, AptType[], string>('apts', () => getApts(100), { onSuccess: setPosts })
 
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,7 +30,7 @@ const Index: FC = () => {
 
   useEffect(() => {
     console.log(posts, isLoading, isError)
-  }, [posts]
+  }, [posts, isLoading, isError]
 )
 
   if (isLoading) {
@@ -52,13 +52,7 @@ const Index: FC = () => {
           {t('properties in belgrade')}
         </h1>
         {paginatedPosts && <>
-          <div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'
-          // initial={{ opacity: 0, scale: 0.5 }}
-          // animate={{ opacity: 1, scale: 1 }}
-          // transition={{ duration: 0.5 }}
-          >
-
-
+          <div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'>
             {paginatedPosts.map((apt) => (
               <AptCard key={apt._id} apt={apt} />
             ))}

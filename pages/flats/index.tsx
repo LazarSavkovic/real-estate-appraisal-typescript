@@ -33,10 +33,7 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
     setFilteredFlats(newFlats)
   }, [flats, searchInput])
 
-  // useEffect(() => {
-  //   console.log(flats, filteredFlats)
-  // }, [filteredFlats])
-
+  const { locale, locales, push  } = useRouter()
   
   if (isLoading) {
     return <div>Učitava se</div>
@@ -45,9 +42,6 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
   if (isError) {
     return<div>{error}</div>
   }
-
-  const { locale, locales, push  } = useRouter()
-
 
 
   return (

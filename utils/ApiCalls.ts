@@ -8,10 +8,10 @@ axios.defaults.baseURL = process.env.NEXT_APP_URL
 
 // APTS
 
-export const getApts = async (): Promise<AptType[]> => {
+export const getApts = async (limit: number): Promise<AptType[]> => {
 
     try {
-        const { data: apts, status } = await axios.get<AptType[]>('/api/apts')
+        const { data: apts, status } = await axios.get<AptType[]>(`/api/apts?limit=${limit}`)
         // console.log(data)
         console.log("response status is", status)
         return apts

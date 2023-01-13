@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { connect } from "../../../utils/connection"
 import { ResponseFuncs, AptType } from "../../../utils/types"
 import  Apt from "../../../models/Apt"
+import { arrayBuffer } from "stream/consumers"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //capture request method, we type it as a key of ResponseFunc to reduce typing later
@@ -18,7 +19,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         const { limit } = req.query;
         let apts;
-        limit ? apts = await Apt.find({}).limit(limit) : apts = await Apt.find({});
+        if (typeof limit === 'string'){
+          limit ? apts = await Apt.find({}).limit(parseInt(limit)) : apts = await Apt.find({});
+        } else {
+          // if limit is an array, take the first string
+          limit ? apts = await Apt.find({}).limit(parseInt(limit[0])) : apts = await Apt.find({});
+        }
+
         res.status(200).json(apts)
       } catch (error) {
         res.status(400).send(error.message)

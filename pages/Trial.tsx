@@ -27,7 +27,7 @@ const Trial: FC = () => {
     return (
         <>
         {posts.map(post => {
-            return <h2>{post.price}</h2>
+            return <h2 key={post._id?.toString()}>{post.price}</h2>
         })}
         {/* <h1 className="text-4xl mt-32">Trial</h1> */}
         </>

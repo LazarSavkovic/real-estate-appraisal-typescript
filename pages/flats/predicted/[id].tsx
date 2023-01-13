@@ -17,7 +17,7 @@ const PredictedFlatPage: FC = () => {
     const oldFlats =  JSON.parse(window.localStorage.getItem('flatsArray')) || [];
     const filtered = oldFlats.filter(oldFlat => oldFlat._id === flatID);
     setFlat(filtered[0])
-  }, [])
+  }, [router.query.id])
 
 
   const handleDelete = async () => {
