@@ -15,22 +15,30 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Potential Responses
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse<FlatType[] | void>) => {
+    GET: async (req: NextApiRequest, res: NextApiResponse) => {
       await connect() // connect to database
       try {
         let flats
         if (req.query.id) {
-          flats = await Flat.find({ author: new mongoose.Types.ObjectId(req.query.id) })
+          let id: string;
+          if(typeof req.query.id === 'string'){
+            id = req.query.id;
+          } else {
+            id = req.query.id[0]
+          }
+          flats = await Flat.find({ author: new mongoose.Types.ObjectId(id) })
         } else {
           flats = await Flat.find({}) /* find all the data in our database */
         }
         res.status(200).json(flats)
       } catch (e) {
+        if(e instanceof Error) {
         res.status(400).send(e.message)
+        }
       }
     },
     // RESPONSE POST REQUESTS
-    POST: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
+    POST: async (req: NextApiRequest, res: NextApiResponse) => {
       await connect() // connect to database
       try {
         const fullLocation = req.body.location + ", Beograd, Srbija";
@@ -48,7 +56,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.status(201).json(flat)
       } catch (error) {
+        if(error instanceof Error) {
         res.status(400).send(error.message)
+        }
       }
     },
   }
