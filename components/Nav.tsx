@@ -40,13 +40,14 @@ const Nav: FC = () => {
             <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
                 <Link href='/' legacyBehavior><a className='font-bold text-l cursor-pointer flex items-center font-[Poppins] text-gray-800'>
                     <span className='text-2xl text-indigo-600 mr-1'>
-                        <ion-icon name="logo-ionic"></ion-icon>
+                        {/* <ion-icon name="logo-ionic"></ion-icon> */}
                     </span>
                     PROCENA/NEKRETNINE</a>
                 </Link>
 
                 <div onClick={() => setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
-                    <ion-icon name={open ? 'close' : 'menu'}></ion-icon>
+                    {/* <ion-icon name={open ? 'close' : 'menu'}></ion-icon> */}
+                    <button>{open ? 'close' : 'menu'}</button>
                 </div>
 
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute text-sm md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>
