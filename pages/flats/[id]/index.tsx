@@ -58,7 +58,9 @@ const FlatPage: FC<FlatPageProps> = ({ session, userId, flatId }: FlatPageProps)
 
       // Throw error with status code in case Fetch API req failed
       if (deleteFlatMutation.isError) {
+        if(deleteFlatMutation.error instanceof Error) {
         throw new Error(deleteFlatMutation.error.message)
+        }
       }
 
       router.push('/')

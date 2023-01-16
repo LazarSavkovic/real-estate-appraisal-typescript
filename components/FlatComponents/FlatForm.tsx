@@ -66,7 +66,9 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
       // Throw error with status code in case Fetch API req failed
       if (putFlatMutation.isError) {
+        if(putFlatMutation.error instanceof Error) {
         throw new Error(putFlatMutation.error.message)
+        }
       }
 
       router.push(`/flats/${id}`)
@@ -129,7 +131,9 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
 
         // Throw error with status code in case Fetch API req failed
         if (postFlatMutation.isError) {
+          if(postFlatMutation.error instanceof Error) {
           throw new Error(postFlatMutation.error.message)
+          }
         }
 
         router.push('/flats')

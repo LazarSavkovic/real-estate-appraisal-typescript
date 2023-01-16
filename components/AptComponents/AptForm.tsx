@@ -76,8 +76,9 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
         // Throw error with status code in case Fetch API req failed
         if (putAptMutation.isError) {
           console.log('some error')
-          throw new Error(putAptMutation.error.message)
-
+          if(putAptMutation.error instanceof Error) {
+            throw new Error(putAptMutation.error.message)
+          }
         }
 
         console.log('about to reroute')
@@ -98,7 +99,9 @@ const AptForm: FC<AptFormProps> = ({ formId, aptForm, forNewApt = true }: AptFor
 
       // Throw error with status code in case Fetch API req failed
       if (postAptMutation.isError) {
+        if(postAptMutation.error instanceof Error) {
         throw new Error(postAptMutation.error.message)
+        }
       }
 
       router.push('/')
