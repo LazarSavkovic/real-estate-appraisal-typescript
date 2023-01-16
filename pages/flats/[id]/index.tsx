@@ -26,7 +26,7 @@ const FlatPage: FC<FlatPageProps> = ({session, userId, flatId}: FlatPageProps) =
   const [message, setMessage] = useState('')
   const [apts, setApts] = useState([]);
 
-  const { data: apartments } = useQuery('apts', () => getApts())
+  const { data: apartments } = useQuery('apts', () => getApts(100))
 
   const showApts = () => {
   setApts(apartments)

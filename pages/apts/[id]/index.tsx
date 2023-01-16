@@ -1,6 +1,5 @@
 import { useState, FC } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 import AptBigCard from '../../../components/AptComponents/AptBigCard'
 import { getApt } from '../../../utils/ApiCalls'
 import { dehydrate, QueryClient, useQuery, useQueryClient, UseQueryResult } from 'react-query';
@@ -23,7 +22,7 @@ const AptPage: FC<AptPageProps> = ({id}: AptPageProps) => {
   const { data: apt, isLoading, isError, error }: UseQueryResult<AptType, Error> = useQuery<AptType, Error, AptType, Array<string>>(['apts', id], () => getApt(id))
 
 
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState<string>('')
 
 
   const handleDelete = async () => {
@@ -32,7 +31,7 @@ const AptPage: FC<AptPageProps> = ({id}: AptPageProps) => {
         method: 'Delete',
       })
       router.push('/')
-    } catch (error) {
+    } catch {
       setMessage('Failed to delete the apt.')
     }
   }
@@ -63,20 +62,32 @@ const AptPage: FC<AptPageProps> = ({id}: AptPageProps) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
 
-  const id = params?.id;
+  let id: string;
+  if (params?.id) {
+    if (typeof params?.id === 'string'){
+      id = params.id;
+    } else {
+      id = params?.id[0]
+    }
+    const queryClient = new QueryClient()
 
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery(['apts', id], () => getApt(id))
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-      id: id,
-      ...(await serverSideTranslations(locale, [ 'common', 'apts'])),
-      // Will be passed to the page component as props
-    },
+    await queryClient.prefetchQuery(['apts', id], () => getApt(id))
+  
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+        id: id,
+        ...(await serverSideTranslations(locale!, [ 'common', 'apts'])),
+        // Will be passed to the page component as props
+      },
+    }
   }
+  else {
+    return {
+      props: {}
+    }
+  }
+
 }
 
 

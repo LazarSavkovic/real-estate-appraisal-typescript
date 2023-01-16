@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Potential Responses for /todos/:id
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
+    GET: async (req: NextApiRequest, res: NextApiResponse) => {
       try {
         await connect() // connect to database
         const flat = await Flat.findOne({_id: id, author: userid})
@@ -27,11 +27,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
         res.status(200).json(flat)
       } catch (error) {
+        if (error instanceof Error) {
         res.status(400).send(error.message)
+        }
       }
     },
     // RESPONSE PUT REQUESTS
-    PUT: async (req: NextApiRequest, res: NextApiResponse<FlatType>) => {
+    PUT: async (req: NextApiRequest, res: NextApiResponse) => {
       
       try {
         await connect() // connect to database
@@ -44,7 +46,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         }
         res.status(200).json(flat)
       } catch (error) {
+        if (error instanceof Error) {
         res.status(400).send(error.message)
+        }
       }
     },
     // RESPONSE FOR DELETE REQUESTS

@@ -1,5 +1,4 @@
 import AptForm from '../../components/AptComponents/AptForm'
-import AuthLayout from '../../components/AuthLayout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react'
 import { GetServerSideProps } from 'next'
@@ -33,10 +32,10 @@ const NewApt: FC = () => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({locale}) => {
-
+  
   return {
     props: {
-      ...(await serverSideTranslations(locale, [ 'common', 'apts'])),
+      ...(await serverSideTranslations(locale!, [ 'common', 'apts'])),
       // Will be passed to the page component as props
     },
   }

@@ -1,6 +1,6 @@
 import { getSession } from 'next-auth/react'
 import FlatCard from '../../components/FlatComponents/FlatCard'
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient, useQuery, UseQueryResult } from 'react-query';
 import Dashboard from '../../components/Dashboard'
 import { getFlats } from '../../utils/ApiCalls'
 import { useEffect, useState, FC } from 'react';
@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
+import { FlatType } from 'utils/types';
 
 interface FlatsProps {
   session: Session
@@ -16,11 +17,11 @@ interface FlatsProps {
 
 const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
 
-  const [flats, setFlats] = useState([])
-  const { isLoading, isError, error } = useQuery('flats', () => getFlats(session.user._id),  {onSuccess: setFlats})
-  const [searchInput, setSearchInput] = useState('')
+  const [flats, setFlats] = useState<FlatType[]>([])
+  const { isLoading, isError, error }: UseQueryResult<FlatType[], Error> = useQuery<FlatType[], Error, FlatType[], string>('flats', () => getFlats(session.user._id),  {onSuccess: setFlats})
+  const [searchInput, setSearchInput] = useState<string>('')
 
-  const [filteredFlats, setFilteredFlats] = useState([])
+  const [filteredFlats, setFilteredFlats] = useState<FlatType[]>([])
 
 
   useEffect(() => {
@@ -33,14 +34,13 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
     setFilteredFlats(newFlats)
   }, [flats, searchInput])
 
-  const { locale, locales, push  } = useRouter()
   
   if (isLoading) {
     return <div>Učitava se</div>
   }
 
   if (isError) {
-    return<div>{error}</div>
+    return<div>{error.message}</div>
   }
 
 
@@ -49,8 +49,8 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
       <div className='grid grid-cols-1'>
         {session && filteredFlats && <Dashboard session={session} setSearchInput={setSearchInput} searchInput={searchInput}>
           <div className='flex flex-col items-center'>
-            {filteredFlats && filteredFlats.map((flat, i) => (
-              <FlatCard key={flat._id} flat={flat} />
+            {filteredFlats && filteredFlats.map((flat) => (
+              <FlatCard key={flat._id?.toString()} flat={flat} />
             ))}
           </div>
         </Dashboard>}
@@ -81,7 +81,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
     props: {
       dehydratedState: dehydrate(queryClient),
       session: session,
-      ...(await serverSideTranslations(locale, ['dashboard', 'common', 'flats'])),
+      ...(await serverSideTranslations(locale!, ['dashboard', 'common', 'flats'])),
       // Will be passed to the page component as props
     },
   }

@@ -91,3 +91,4 @@ export interface FlatFormErrors {
   rooms?: string,
   floor?: string
 }
+

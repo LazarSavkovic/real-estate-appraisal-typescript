@@ -7,7 +7,7 @@ import { FlatType } from 'utils/types'
 // Define props
 interface FlatCardProps {
     flat: FlatType,
-    predicted: boolean
+    predicted?: boolean
   }
 
 const FlatCard: FC<FlatCardProps> = ({ flat, predicted }: FlatCardProps) => {

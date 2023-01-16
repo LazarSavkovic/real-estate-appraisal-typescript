@@ -20,13 +20,13 @@ const Index: FC = () => {
   const { isLoading, isError, error }: UseQueryResult<AptType[], Error> = useQuery<AptType[], Error, AptType[], string>('apts', () => getApts(100), { onSuccess: setPosts })
 
   const pageSize = 10;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number): void => {
     setCurrentPage(page);
   };
 
-  const paginatedPosts = paginate(posts, currentPage, pageSize);
+  const paginatedPosts: AptType[] = paginate(posts, currentPage, pageSize);
 
   useEffect(() => {
     console.log(posts, isLoading, isError)
@@ -41,9 +41,6 @@ const Index: FC = () => {
     return <div>{error.message}</div>
   }
 
-
-
-
   return (
 
     <div className="flex bg-blue-400 min-h-screen">
@@ -54,7 +51,7 @@ const Index: FC = () => {
         {paginatedPosts && <>
           <div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'>
             {paginatedPosts.map((apt) => (
-              <AptCard key={apt._id} apt={apt} />
+              <AptCard key={apt._id?.toString()} apt={apt} />
             ))}
 
           </div>
@@ -79,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   const queryClient = new QueryClient()
   console.log(locale)
 
-  await queryClient.prefetchQuery('apts', getApts)
+  await queryClient.prefetchQuery('apts', () => getApts(100))
 
   if (locale) {
     return {

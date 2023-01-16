@@ -1,26 +1,27 @@
 import { useRouter } from 'next/router'
 import AptForm from '../../../components/AptComponents/AptForm'
-import { dehydrate, QueryClient, useQuery } from 'react-query';
+import { dehydrate, QueryClient, useQuery, UseQueryResult } from 'react-query';
 import { getApt } from '../../../utils/ApiCalls'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react';
 import { GetServerSideProps } from 'next'
+import { AptType } from 'utils/types'
 
 interface EditAptProps {
   id: string
 }
 
 
-const EditApt: FC<EditAptProps> = ({id}: EditAptProps) => {
+const EditApt: FC<EditAptProps> = ({ id }: EditAptProps) => {
   const router = useRouter()
 
-  const { data: apt, error } = useQuery(['apts', id], () => getApt(id))
+  const { data: apt, error }: UseQueryResult<AptType, Error> = useQuery<AptType, Error, AptType, Array<string>>(['apts', id], () => getApt(id))
 
 
   if (error) return <p>Failed to load</p>
   if (!apt) return <p>Loading...</p>
 
-  const aptForm = {
+  const aptForm: AptType = {
     title: apt.title,
     price: apt.price,
     short_description: apt.short_description,
@@ -43,21 +44,32 @@ const EditApt: FC<EditAptProps> = ({id}: EditAptProps) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params, locale }) => {
 
-  const id = params.id;
+  let id: string;
+  if (params?.id) {
+    if (typeof params?.id === 'string') {
+      id = params.id;
+    } else {
+      id = params?.id[0]
+    }
+    const queryClient = new QueryClient()
 
-  const queryClient = new QueryClient()
+    await queryClient.prefetchQuery(['apts', id], () => getApt(id))
 
-  await queryClient.prefetchQuery(['apts', id], () => getApt(id))
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-      id: id,
-      ...(await serverSideTranslations(locale, [ 'common', 'apts'])),
-      // Will be passed to the page component as props
-    },
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+        id: id,
+        ...(await serverSideTranslations(locale!, ['common', 'apts'])),
+        // Will be passed to the page component as props
+      },
+    }
   }
-}
+  else {
+    return {
+      props: {}
+    }
+  }
 
+}
 
 export default EditApt

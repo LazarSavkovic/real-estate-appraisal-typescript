@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next"
 import { connect } from "../../../utils/connection"
 import { ResponseFuncs, AptType } from "../../../utils/types"
 import  Apt from "../../../models/Apt"
-import { arrayBuffer } from "stream/consumers"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   //capture request method, we type it as a key of ResponseFunc to reduce typing later
@@ -14,7 +13,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Potential Responses
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse<Array<AptType> | void>) => {
+    GET: async (req: NextApiRequest, res: NextApiResponse) => {
       await connect() // connect to database
       try {
         const { limit } = req.query;
@@ -28,7 +27,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
         res.status(200).json(apts)
       } catch (error) {
-        res.status(400).send(error.message)
+        if (error instanceof Error) {
+          res.status(400).send(error.message)
+        }
       }
 
     },
