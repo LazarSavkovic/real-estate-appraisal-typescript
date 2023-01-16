@@ -10,7 +10,7 @@ import { AptType } from 'utils/types'
 interface FlatBigCardProps {
     flat: FlatType,
     handleDelete: MouseEventHandler,
-    apts: AptType[]
+    apts?: AptType[]
 
   }
 
@@ -22,7 +22,7 @@ const FlatBigCard: FC<FlatBigCardProps> = ({ flat, handleDelete, apts }: FlatBig
         <div 
             className="flex flex-col  bg-white border rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 w-full m-0">
             <div className="flex justify-between items-center md:w-2/4">
-                {flat.geometry?.coordinates && <FlatMaps latitude={flat.geometry.coordinates[1]} longitude={flat.geometry.coordinates[0]} apts={apts}/>}
+                {flat.geometry?.coordinates && <FlatMaps latitude={flat.geometry.coordinates[1]} longitude={flat.geometry.coordinates[0]} apts={apts || undefined}/>}
             </div>
             <div className="flex flex-col justify-between px-4 leading-normal md:w-2/4  py-10">
                 <div>

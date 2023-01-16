@@ -2,32 +2,33 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut } from 'next-auth/react'
 import styles from '../styles/Dashboard.module.css'
-import React, { useEffect, useState, FC, ReactNode } from 'react'
+import React, { useState, FC, ReactNode } from 'react'
 import { useTranslation } from 'next-i18next'
 import { Session } from 'next-auth'
 
 interface DashboardProps {
     children: ReactNode,
     session: Session,
-    setSearchInput: Function,
-    searchInput: string
+    setSearchInput?: (str: string) => void,
+    searchInput?: string
 }
 
-const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, searchInput }: DashboardProps ) => {
+const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, searchInput }: DashboardProps) => {
 
-    const {t} = useTranslation('dashboard');
+    const { t } = useTranslation('dashboard');
 
-    let [open, setOpen] = useState(false);
-    let [flat, setFlat] = useState(false);
+    let [open, setOpen] = useState<boolean>(false);
 
     const router = useRouter();
 
-    function handleSignOut() {
+    function handleSignOut(): void {
         signOut()
     }
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchInput(e.target.value)
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        if (setSearchInput) {
+            setSearchInput(e.target.value)
+        }
     }
 
     const getPlace = () => {
@@ -43,16 +44,10 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
         }
     }
 
-
-    const variants = {
-        open: { opacity: 1, y: 0 },
-        closed: { opacity: 0, y: "-100%" },
-      }    
-
     return (
         <>
-            <aside 
-       className={`fixed bg-blue-400 z-10 top-14 pb-3 px-6 w-full flex flex-col h-screen border-r bg-white transition-all duration-300 w-6/12  sm:w-5/12 md:w-4/12  lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] ${open ? '' : 'ml-[-100%] '}`}>
+            <aside
+                className={`fixed bg-blue-400 z-10 top-14 pb-3 px-6 w-full flex flex-col h-screen border-r bg-white transition-all duration-300 w-6/12  sm:w-5/12 md:w-4/12  lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%] ${open ? '' : 'ml-[-100%] '}`}>
                 <div >
                     <div className="mt-16 text-center">
                         <img src={session.user.image} alt="" className="w-10 h-10 m-auto rounded-full object-cover lg:w-24 lg:h-24" />
@@ -154,7 +149,7 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                 </svg>
                             </button>
-                            <button onClick={() => setFlat(!open)} aria-label="notification" className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
+                            <button aria-label="notification" className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 m-auto text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                                 </svg>

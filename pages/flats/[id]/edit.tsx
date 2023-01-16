@@ -60,21 +60,33 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req, loca
       }
     }
   }
+  let id: string;
+  if (params?.id) {
+    if (typeof params?.id === 'string') {
+      id = params.id;
+    } else {
+      id = params?.id[0]
+    }
+    const queryClient = new QueryClient()
 
-  const queryClient = new QueryClient()
-
-  await queryClient.prefetchQuery(['flat', params.id], () => getFlat({ userId: session.user._id, flatId: params.id }))
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-      session: session,
-      userId: session.user._id,
-      flatId: params.id,
-      ...(await serverSideTranslations(locale, ['dashboard', 'common', 'flats', 'flatForm'])),
-      // Will be passed to the page component as props
-    },
+    await queryClient.prefetchQuery(['flat', id], () => getFlat({ userId: session.user._id, flatId: id }))
+  
+    return {
+      props: {
+        dehydratedState: dehydrate(queryClient),
+        session: session,
+        userId: session.user._id,
+        flatId: params.id,
+        ...(await serverSideTranslations(locale!, ['dashboard', 'common', 'flats', 'flatForm'])),
+        // Will be passed to the page component as props
+      },
+    }
+  } else {
+    return {
+      props: {}
+    }
   }
+
 }
 
 

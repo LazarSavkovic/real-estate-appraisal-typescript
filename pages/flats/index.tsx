@@ -4,7 +4,6 @@ import { dehydrate, QueryClient, useQuery, UseQueryResult } from 'react-query';
 import Dashboard from '../../components/Dashboard'
 import { getFlats } from '../../utils/ApiCalls'
 import { useEffect, useState, FC } from 'react';
-import { useRouter } from 'next/router'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
@@ -13,7 +12,6 @@ import { FlatType } from 'utils/types';
 interface FlatsProps {
   session: Session
 }
-
 
 const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
 

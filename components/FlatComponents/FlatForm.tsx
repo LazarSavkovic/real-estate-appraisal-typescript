@@ -12,8 +12,8 @@ interface FlatFormProps {
   userId?: string,
   formId: string,
   flatForm?: FlatType,
-  forNewFlat: boolean,
-  justPredict: boolean
+  forNewFlat?: boolean,
+  justPredict?: boolean
 }
 
 const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = true, justPredict = false }: FlatFormProps) => {

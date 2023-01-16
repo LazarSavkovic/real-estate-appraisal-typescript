@@ -1,7 +1,5 @@
 import FlatForm from '../../components/FlatComponents/FlatForm'
 import { getSession } from 'next-auth/react'
-import Dashboard from '../../components/Dashboard'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react'
 import { GetServerSideProps } from 'next'
 

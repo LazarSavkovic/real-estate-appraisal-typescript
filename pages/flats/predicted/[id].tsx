@@ -4,17 +4,25 @@ import FlatBigCard from '../../../components/FlatComponents/FlatBigCard'
 import { getSession } from 'next-auth/react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
+import { FlatType } from 'utils/types'
 
 
 const PredictedFlatPage: FC = () => {
   const router = useRouter()
-  const [message, setMessage] = useState('')
-  const [flat, setFlat] = useState(false)
+  const [message, setMessage] = useState<string>('')
+  const [flat, setFlat] = useState<false | FlatType>(false)
 
   useEffect( () => {
-    
     const flatID = router.query.id;
-    const oldFlats =  JSON.parse(window.localStorage.getItem('flatsArray')) || [];
+    
+    const flatsArrayString = localStorage.getItem('flatsArray')
+    let oldFlats: FlatType[]
+    if (flatsArrayString) {
+        oldFlats = JSON.parse(flatsArrayString);
+    } else {
+         oldFlats =  [];
+    }
+
     const filtered = oldFlats.filter(oldFlat => oldFlat._id === flatID);
     setFlat(filtered[0])
   }, [router.query.id])
@@ -37,9 +45,7 @@ const PredictedFlatPage: FC = () => {
 
     <div className="container mx-auto my-28 w-3/4" >
       <div className='grid grid-cols-1'>
-
-        {flat && <FlatBigCard key={flat._id} flat={flat} handleDelete={handleDelete} />}
-
+        {flat && <FlatBigCard key={flat._id?.toString()} flat={flat} handleDelete={handleDelete} />}
       {message && <p>{message}</p>}
     </div>
     </div >
@@ -49,7 +55,7 @@ const PredictedFlatPage: FC = () => {
 
 
 
-export const getServerSideProps: GetServerSideProps = async ({ params, req, locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({  req, locale }) => {
 
   const session = await getSession({ req })
 
@@ -63,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params, req, loca
   }
 
   return { props: { 
-      ...(await serverSideTranslations(locale, ['dashboard', 'common', 'flats'])),
+      ...(await serverSideTranslations(locale!, ['dashboard', 'common', 'flats'])),
       // Will be passed to the page component as props
   } }
 }

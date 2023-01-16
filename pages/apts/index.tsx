@@ -2,7 +2,6 @@ import AptCard from '../../components/AptComponents/AptCard'
 import { useEffect, useState, FC } from "react";
 import Pagination from "../../components/Pagination";
 import { paginate } from "../../utils/paginate";
-// import { motion } from 'framer-motion'
 import { dehydrate, QueryClient, useQuery, UseQueryResult } from 'react-query';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getApts } from '../../utils/ApiCalls';

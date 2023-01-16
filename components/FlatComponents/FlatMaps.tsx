@@ -5,7 +5,7 @@ import { AptType } from 'utils/types';
 interface FlatMapsProps {
     longitude: number,
     latitude: number,
-    apts: AptType[]
+    apts?: AptType[]
 }
 
 
