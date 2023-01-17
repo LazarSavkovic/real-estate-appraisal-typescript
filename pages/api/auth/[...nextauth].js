@@ -2,7 +2,6 @@ import NextAuth from 'next-auth'
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-// import dbConnect from '../../../lib/dbConnect'
 import { connect } from "../../../utils/connection"
 import User from '../../../models/User'
 import { compare } from 'bcryptjs'
