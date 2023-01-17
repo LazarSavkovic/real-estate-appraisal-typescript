@@ -27,7 +27,7 @@ const Create: FC<CreateProps> = (props: CreateProps) => {
     }
 
     // Make the API request
-    await fetch(props.url, {
+    await fetch(props.url+"/todos", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const Create: FC<CreateProps> = (props: CreateProps) => {
 export const getStaticProps: GetStaticProps = async (context: any) => {
   return {
     props: {
-      url: process.env.API_URL,
+      url: process.env.NEXT_API_URL,
     },
   }
 }
