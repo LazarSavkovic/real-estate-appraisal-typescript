@@ -5,7 +5,7 @@ import Image from 'next/image'
 import styles from '../styles/Form.module.css'
 import { HiAtSymbol, HiFingerPrint } from 'react-icons/hi'
 import { useState, FC } from 'react'
-import { signIn, signOut } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { useFormik } from 'formik'
 import { loginValidate } from '../utils/validate'
 import { useRouter } from 'next/router'
@@ -17,7 +17,7 @@ const Login: FC = () => {
 
     const {t} = useTranslation('login')
     
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState<boolean>(false)
     const router = useRouter()
     const formik = useFormik({
         initialValues: {
@@ -27,7 +27,7 @@ const Login: FC = () => {
         validate: loginValidate,
         onSubmit
     });
-    async function onSubmit(values) {
+    async function onSubmit(values: {email: string, password: string}) {
         const status = await signIn('credentials', {
             redirect: false,
             email: values.email,
@@ -55,8 +55,7 @@ const Login: FC = () => {
                     <div className={styles.input_group}>
                         <input
                             type='email'
-                            name='email'
-                            placeholder={t('email')}
+                            placeholder={t('email') as string}
                             className={styles.input_text}
                             {...formik.getFieldProps('email')} />
                         <span className='icon flex items-center px-4' >
@@ -67,8 +66,7 @@ const Login: FC = () => {
                     <div className={styles.input_group}>
                         <input
                             type={show ? 'text' : 'password'}
-                            name='password'
-                            placeholder={t('password')}
+                            placeholder={t('password') as string}
                             className={styles.input_text}
                             {...formik.getFieldProps('password')} />
                         <span className='icon flex items-center px-4' onClick={() => setShow(!show)}>

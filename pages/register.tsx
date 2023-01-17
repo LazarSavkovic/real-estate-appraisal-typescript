@@ -1,14 +1,12 @@
 import Head from 'next/head'
 import AuthLayout from '../components/AuthLayout'
 import Link from 'next/link'
-import Image from 'next/image'
 import styles from '../styles/Form.module.css'
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from 'react-icons/hi'
 import { useState, FC } from 'react'
 import { useFormik } from 'formik'
 import { registerValidate } from '../utils/validate'
 import { useRouter } from 'next/router'
-// import { motion } from 'framer-motion'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import { GetStaticProps } from 'next'
@@ -30,7 +28,12 @@ const Register: FC = () => {
         onSubmit
     })
 
-    async function onSubmit(values) {
+    async function onSubmit(values: {
+        username: string,
+        email: string,
+        password: string,
+        cpassword: string
+    }) {
         const options = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -66,8 +69,7 @@ const Register: FC = () => {
                     <div className={styles.input_group}>
                         <input
                             type='text'
-                            name='username'
-                            placeholder={t('username')}
+                            placeholder={t('username') as string}
                             className={styles.input_text}
                             {...formik.getFieldProps('username')} />
                         <span className='icon flex items-center px-4' >
@@ -78,8 +80,7 @@ const Register: FC = () => {
                     <div className={styles.input_group}>
                         <input
                             type='email'
-                            name='email'
-                            placeholder={t('email')}
+                            placeholder={t('email') as string}
                             className={styles.input_text}
                             {...formik.getFieldProps('email')} />
                         <span className='icon flex items-center px-4' >
@@ -90,8 +91,7 @@ const Register: FC = () => {
                     <div className={styles.input_group}>
                         <input
                             type={show.password ? 'text' : 'password'}
-                            name='password'
-                            placeholder={t('password')}
+                            placeholder={t('password') as string}
                             className={styles.input_text}
                             {...formik.getFieldProps('password')} />
                         <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, password: !show.password })}>
@@ -102,8 +102,7 @@ const Register: FC = () => {
                     <div className={styles.input_group}>
                         <input
                             type={show.cpassword ? 'text' : 'password'}
-                            name='cpassword'
-                            placeholder={t('confirm password')}
+                            placeholder={t('confirm password') as string}
                             className={styles.input_text}
                             {...formik.getFieldProps('cpassword')} />
                         <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, cpassword: !show.cpassword })}>

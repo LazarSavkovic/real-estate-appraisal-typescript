@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import { useState, FC } from 'react'
+import {  FC } from 'react'
 import { useSession, signOut } from 'next-auth/react'
 import AuthLayout from '../components/AuthLayout'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -14,7 +14,7 @@ const Guest: FC = () => {
     <div className='container mx-auto text-center py-20'>
       <h3 className='text-3xl font-bold py-5'>
         <span className='text-3xl text-indigo-600 mr-1 pt-2'>
-          <ion-icon name="logo-ionic"></ion-icon>
+          {/* <ion-icon name="logo-ionic"></ion-icon> */}
         </span>
         {t("real estate appraisal")}
       </h3>
@@ -71,7 +71,7 @@ const Home: FC = () => {
   return (
     <AuthLayout>
       <div className={styles.container}>
-        {session ? User({ session }) : Guest()}
+        {session ? User({ session }) : Guest({})}
       </div>
     </AuthLayout>
   )
@@ -85,6 +85,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         ...(await serverSideTranslations(locale, ['index', 'common']))
         // Will be passed to the page component as props
       },
+    }
+  } else {
+    return {
+      props: {}
     }
   }
 }
