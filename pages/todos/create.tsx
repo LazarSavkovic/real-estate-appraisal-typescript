@@ -54,7 +54,7 @@ const Create: FC<CreateProps> = (props: CreateProps) => {
 export const getStaticProps: GetStaticProps = async (context: any) => {
   return {
     props: {
-      url: process.env.NEXT_API_URL,
+      url: process.env.NEXT_API_URL || 'http://localhost:3000/api',
     },
   }
 }
