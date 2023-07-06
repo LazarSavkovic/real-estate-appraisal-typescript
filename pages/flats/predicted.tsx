@@ -16,7 +16,7 @@ const PredictedFlats: FC = () => {
         if (flatsArrayString) {
             oldFlats = JSON.parse(flatsArrayString);
         } else {
-             oldFlats =  [];
+            oldFlats = [];
         }
         setFlats([...oldFlats])
     }, [])
@@ -25,9 +25,11 @@ const PredictedFlats: FC = () => {
         <div className="container mx-auto my-28 w-3/4" >
             <div className='grid grid-cols-1'>
                 <div className={styles.container}>
-                    {flats.map((flat) => (
-                        <FlatCard key={flat._id?.toString()} flat={flat} predicted={true}/>
-                    ))}
+                    {flats.map((flat) => {
+                        if (flat) {
+                            return <FlatCard key={flat._id?.toString()} flat={flat} predicted={true} />
+                        }
+                    })}
                 </div>
 
             </div>

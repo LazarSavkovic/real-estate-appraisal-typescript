@@ -60,22 +60,22 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form: FlatType) => {
     const { id } = router.query
-   if (typeof id === 'string') {
-    try {
-      putFlatMutation.mutate({ form, id })
+    if (typeof id === 'string') {
+      try {
+        putFlatMutation.mutate({ form, id })
 
-      // Throw error with status code in case Fetch API req failed
-      if (putFlatMutation.isError) {
-        if(putFlatMutation.error instanceof Error) {
-        throw new Error(putFlatMutation.error.message)
+        // Throw error with status code in case Fetch API req failed
+        if (putFlatMutation.isError) {
+          if (putFlatMutation.error instanceof Error) {
+            throw new Error(putFlatMutation.error.message)
+          }
         }
-      }
 
-      router.push(`/flats/${id}`)
-    } catch (error) {
-      setMessage('Failed to update flat')
+        router.push(`/flats/${id}`)
+      } catch (error) {
+        setMessage('Failed to update flat')
+      }
     }
-   }
 
   }
 
@@ -93,16 +93,14 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
           body: JSON.stringify(form),
         })
 
-        const result = await res.json()
-
-        const flat = result.data;
+        const flat = await res.json()
 
         const flatsArrayString = localStorage.getItem('flatsArray')
         let oldFlats: FlatType[]
         if (flatsArrayString) {
-            oldFlats = JSON.parse(flatsArrayString);
+          oldFlats = JSON.parse(flatsArrayString);
         } else {
-             oldFlats =  [];
+          oldFlats = [];
         }
 
         oldFlats.push(flat);
@@ -123,16 +121,16 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     } else {
 
       const formWithAuthor = form;
-        formWithAuthor.author = new mongoose.Types.ObjectId(userId)
-            
+      formWithAuthor.author = new mongoose.Types.ObjectId(userId)
+
       try {
-        
+
         postFlatMutation.mutate(formWithAuthor)
 
         // Throw error with status code in case Fetch API req failed
         if (postFlatMutation.isError) {
-          if(postFlatMutation.error instanceof Error) {
-          throw new Error(postFlatMutation.error.message)
+          if (postFlatMutation.error instanceof Error) {
+            throw new Error(postFlatMutation.error.message)
           }
         }
 
@@ -143,7 +141,7 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     }
   }
 
-  const handleChange = (e:  React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const value = target.value
     const name = target.name

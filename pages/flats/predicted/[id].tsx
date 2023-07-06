@@ -12,18 +12,26 @@ const PredictedFlatPage: FC = () => {
   const [message, setMessage] = useState<string>('')
   const [flat, setFlat] = useState<false | FlatType>(false)
 
-  useEffect( () => {
+  useEffect(() => {
     const flatID = router.query.id;
-    
+
     const flatsArrayString = localStorage.getItem('flatsArray')
     let oldFlats: FlatType[]
     if (flatsArrayString) {
-        oldFlats = JSON.parse(flatsArrayString);
+      oldFlats = JSON.parse(flatsArrayString);
     } else {
-         oldFlats =  [];
+      oldFlats = [];
     }
 
-    const filtered = oldFlats.filter(oldFlat => oldFlat._id === flatID);
+    const filtered = oldFlats.filter(oldFlat => {
+      if (oldFlat) {
+        if ('_id' in oldFlat && oldFlat._id) {
+          return oldFlat._id.toString() === flatID;
+        }
+
+      }
+
+    });
     setFlat(filtered[0])
   }, [router.query.id])
 
@@ -46,8 +54,8 @@ const PredictedFlatPage: FC = () => {
     <div className="container mx-auto my-28 w-3/4" >
       <div className='grid grid-cols-1'>
         {flat && <FlatBigCard key={flat._id?.toString()} flat={flat} handleDelete={handleDelete} />}
-      {message && <p>{message}</p>}
-    </div>
+        {message && <p>{message}</p>}
+      </div>
     </div >
   )
 }
@@ -55,7 +63,7 @@ const PredictedFlatPage: FC = () => {
 
 
 
-export const getServerSideProps: GetServerSideProps = async ({  req, locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
 
   const session = await getSession({ req })
 
@@ -68,10 +76,12 @@ export const getServerSideProps: GetServerSideProps = async ({  req, locale }) =
     }
   }
 
-  return { props: { 
+  return {
+    props: {
       ...(await serverSideTranslations(locale!, ['dashboard', 'common', 'flats'])),
       // Will be passed to the page component as props
-  } }
+    }
+  }
 }
 
 export default PredictedFlatPage
