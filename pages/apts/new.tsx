@@ -19,8 +19,8 @@ const NewApt: FC = () => {
 
 
     <div className="flex bg-blue-400">
-      <div className="m-auto bg-slate-50 rounded-md w-3/5 min-h-[75%] mt-24 pt-16">
-        <div className='grid grid-cols-1 px-32'>
+      <div className="flex justify-center items-center flex-col m-auto bg-slate-50 rounded-md w-[92%] sm:w-4/5 md:w-3/5 min-h-[75%] mt-24 pt-16">
+        <div className='flex flex-col w-[92%] sm:w-4/5 md:w-3/5'>
           <h1 className="text-3xl text-center tracking-wider">
             Unesi Novu Nekretninu
           </h1>

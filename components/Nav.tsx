@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { useState, FC, useEffect } from 'react'
 import Button from './Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
@@ -34,6 +34,13 @@ const Nav: FC = () => {
     function goToRegister() {
         router.push('/register')
     }
+
+    const pathname: string = router.pathname;
+
+    useEffect(() => {
+      setOpen(false); // Close the navigation panel
+    }, [ pathname ]);
+
     return (
         <div
             className='shadow-md w-full fixed top-0 left-0 z-50'>
@@ -45,9 +52,14 @@ const Nav: FC = () => {
                     PROCENA/NEKRETNINE</a>
                 </Link>
 
-                <div onClick={() => setOpen(!open)} className='text-3xl absolute right-8 top-6 cursor-pointer md:hidden'>
+                <div onClick={() => setOpen(!open)} className='text-2xl border border-red-500 absolute right-8 top-6 cursor-pointer md:hidden'>
                     {/* <ion-icon name={open ? 'close' : 'menu'}></ion-icon> */}
-                    <button>{open ? 'close' : 'menu'}</button>
+                    {open ? 'close' : 
+                    <svg viewBox="0 0 100 80" width="25" height="25">
+                        <rect width="100" height="15"></rect>
+                        <rect y="30" width="100" height="15"></rect>
+                        <rect y="60" width="100" height="15"></rect>
+                    </svg>}
                 </div>
 
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute text-sm md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>

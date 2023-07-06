@@ -33,7 +33,7 @@ const EditApt: FC<EditAptProps> = ({ id }: EditAptProps) => {
   }
 
   return (
-    <div className="container mx-auto my-40 w-2/4" >
+    <div className="container mx-auto my-40 w-[82%] sm:w-3/4 md:w-2/4" >
       <div className='grid grid-cols-1'>
         <AptForm formId="edit-apt-form" aptForm={aptForm} forNewApt={false} />
       </div>

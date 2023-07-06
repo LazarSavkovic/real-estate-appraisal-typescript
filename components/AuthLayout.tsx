@@ -9,7 +9,7 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children }: AuthLayoutProps) => {
 
     return (
         <div className="flex h-screen bg-blue-400">
-            <div className="m-auto bg-slate-50 rounded-md w-3/5 min-h-[75%] grid lg:grid-cols-2">
+            <div className="m-auto bg-slate-50 rounded-md md:w-3/5 w-[92%] min-h-[75%] grid lg:grid-cols-2">
                 <div className={styles.imgStyle}>
                     <div className={styles.cartoonImg}>
 

@@ -49,7 +49,7 @@ const AptPage: FC<AptPageProps> = ({id}: AptPageProps) => {
   return (
 
     <div className="flex bg-blue-400">
-      <div className="m-auto bg-slate-50 rounded-md w-3/5 mt-24 pt-16 flex justify-center">
+      <div className="m-auto bg-slate-50 rounded-md w-[92%] sm:w-4/5 md:w-3/5 mt-24 pt-16 flex justify-center">
 
         {apt?._id ? <AptBigCard key={apt._id.toString()} apt={apt} handleDelete={handleDelete} /> : null}
 
