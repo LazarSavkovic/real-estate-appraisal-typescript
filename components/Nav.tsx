@@ -54,7 +54,7 @@ const Nav: FC = () => {
 
                 <div onClick={() => setOpen(!open)} className='text-2xl border border-red-500 absolute right-8 top-6 cursor-pointer md:hidden'>
                     {/* <ion-icon name={open ? 'close' : 'menu'}></ion-icon> */}
-                    {open ? 'close' : 
+                    {open ? <img src='/images/cross.svg' className="h-5 w-5" /> : 
                     <svg viewBox="0 0 100 80" width="25" height="25">
                         <rect width="100" height="15"></rect>
                         <rect y="30" width="100" height="15"></rect>
