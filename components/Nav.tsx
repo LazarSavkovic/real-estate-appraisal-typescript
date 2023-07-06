@@ -22,6 +22,7 @@ const Nav: FC = () => {
     }
     const router = useRouter();
     const { locale, locales } = router;
+    console.log(locale, locales)
     const oppositeLocale = locales!.filter((loc => loc !== locale))[0]
 
     const handleLanguageChange = () => {
@@ -59,7 +60,9 @@ const Nav: FC = () => {
                         <rect width="100" height="15"></rect>
                         <rect y="30" width="100" height="15"></rect>
                         <rect y="60" width="100" height="15"></rect>
-                    </svg>}
+                    </svg>
+                    
+                    }
                 </div>
 
                 <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute text-sm md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>

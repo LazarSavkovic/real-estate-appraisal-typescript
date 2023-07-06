@@ -3,6 +3,8 @@ import { getSession } from 'next-auth/react'
 import { FC } from 'react'
 import { GetServerSideProps } from 'next'
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
 const PredictNewFlat: FC = () => {
   const flatForm = {
     title: '',
@@ -43,6 +45,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
   
   return {
     props: {
+      ...(await serverSideTranslations(locale!, [ 'common', 'flats', 'flatForm'])),
+      // Will be passed to the page component as props
     }
   }
 }

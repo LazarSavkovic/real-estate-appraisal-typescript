@@ -60,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
     props: {
       session: session,
       userId: userId,
-      ...(await serverSideTranslations(locale!, ['dashboard', 'common', 'flats', 'flatForm'])),
+      ...(await serverSideTranslations(locale!, ['flats', 'flatForm', 'dashboard', 'common'])),
       // Will be passed to the page component as props
     }
   }
