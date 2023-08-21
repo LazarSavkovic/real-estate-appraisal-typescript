@@ -44,17 +44,17 @@ const Nav: FC = () => {
 
     return (
         <div
-            className='shadow-md w-full fixed top-0 left-0 z-50'>
-            <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
+            className='shadow-md w-full fixed top-0 left-0 z-50  '>
+            <div className='md:flex items-center justify-between bg-white py-4 h-14 md:px-10 px-7'>
                 <Link href='/' legacyBehavior><a className='font-bold text-l cursor-pointer flex items-center font-[Poppins] text-gray-800'>
                     <span className='text-2xl text-indigo-600 mr-1'>
-                        {/* <ion-icon name="logo-ionic"></ion-icon> */}
+             
                     </span>
                     PROCENA/NEKRETNINE</a>
                 </Link>
 
-                <div onClick={() => setOpen(!open)} className='text-2xl border border-red-500 absolute right-8 top-6 cursor-pointer md:hidden'>
-                    {/* <ion-icon name={open ? 'close' : 'menu'}></ion-icon> */}
+                <div onClick={() => setOpen(!open)} className='text-2xl border border-red-500 absolute right-8 top-6 cursor-pointer lg:hidden'>
+                 
                     {open ? <img src='/images/cross.svg' className="h-5 w-5" /> : 
                     <svg viewBox="0 0 100 80" width="25" height="25">
                         <rect width="100" height="15"></rect>
@@ -65,10 +65,10 @@ const Nav: FC = () => {
                     }
                 </div>
 
-                <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute text-sm md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>
+                <ul className={`lg:flex lg:items-center lg:pb-0 pb-12 absolute text-sm lg:static bg-white lg:bg-transparent lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>
                     {
                         Links.map((link) => (
-                            <li key={link.name} className='hover:scale-105 focus:scale-95 transition-all md:ml-8 md:my-0 my-7'>
+                            <li key={link.name} className='hover:scale-105 focus:scale-95 transition-all lg:ml-8 lg:my-0 my-7'>
                                 <Link href={link.link} legacyBehavior><a className='text-gray-800 hover:text-gray-400 duration-500'>{link.name}</a></Link>
                             </li>
                         ))

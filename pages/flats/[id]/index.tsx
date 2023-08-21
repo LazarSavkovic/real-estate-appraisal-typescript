@@ -71,9 +71,7 @@ const FlatPage: FC<FlatPageProps> = ({ session, userId, flatId }: FlatPageProps)
 
   return (
 
-    <div className='container mx-auto my-28 w-3/4' >
-      <div className='grid grid-cols-1'>
-
+    <>
         {session && flat && <Dashboard session={session}>
           <div className='flex pb-3 w-[100%] justify-self-end'>
             {!apts[0] && <button onClick={showApts} className='button'>{t('show properties on market')}</button>}
@@ -84,8 +82,7 @@ const FlatPage: FC<FlatPageProps> = ({ session, userId, flatId }: FlatPageProps)
 
         {message && <p>{message}</p>}
 
-      </div>
-    </div >
+      </ >
   )
 }
 

@@ -78,9 +78,7 @@ const Maps: FC<MapsProps> = ({ session }: MapsProps) => {
 
 
     return (
-        <div className="container mx-auto my-28 w-3/4" >
-            <div className='grid grid-cols-1'>
-                <Dashboard session={session}>
+        <>     <Dashboard session={session}>
                     {center && <Map
                         {...viewState}
                         onMove={evt => setViewState(evt.viewState)}
@@ -119,9 +117,7 @@ const Maps: FC<MapsProps> = ({ session }: MapsProps) => {
                             </Popup>}
                     </Map>}
                 </Dashboard>
-            </div>
-        </div>
-
+            </>
 
     )
 }

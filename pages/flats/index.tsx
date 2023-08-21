@@ -43,8 +43,8 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
 
 
   return (
-    <div className="container mx-auto my-28 w-3/4" >
-      <div className='grid grid-cols-1'>
+
+    <>
         {session && filteredFlats && <Dashboard session={session} setSearchInput={setSearchInput} searchInput={searchInput}>
           <div className='flex flex-col items-center'>
             {filteredFlats && filteredFlats.map((flat) => (
@@ -52,9 +52,7 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
             ))}
           </div>
         </Dashboard>}
-
-      </div>
-    </div>
+</>
 
   )
 }
