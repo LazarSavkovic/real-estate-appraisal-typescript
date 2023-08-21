@@ -53,7 +53,7 @@ const Nav: FC = () => {
                     PROCENA/NEKRETNINE</a>
                 </Link>
 
-                <div onClick={() => setOpen(!open)} className='text-2xl border border-red-500 absolute right-8 top-6 cursor-pointer lg:hidden'>
+                <div onClick={() => setOpen(!open)} className='text-2xl absolute right-8 top-1/2 transform -translate-y-1/2 cursor-pointer lg:hidden'>
                  
                     {open ? <img src='/images/cross.svg' className="h-5 w-5" /> : 
                     <svg viewBox="0 0 100 80" width="25" height="25">
@@ -65,7 +65,7 @@ const Nav: FC = () => {
                     }
                 </div>
 
-                <ul className={`lg:flex lg:items-center lg:pb-0 pb-12 absolute text-sm lg:static bg-white lg:bg-transparent lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-20 ' : 'top-[-490px]'}`}>
+                <ul className={`lg:flex lg:items-center lg:pb-0 pb-12 absolute text-sm lg:static bg-white lg:bg-transparent lg:z-auto z-[-1] right-0 w-56 lg:w-auto lg:pl-0 pl-12 transition-all duration-500 ease-in ${open ? 'top-14 ' : 'top-[-490px]'}`}>
                     {
                         Links.map((link) => (
                             <li key={link.name} className='hover:scale-105 focus:scale-95 transition-all lg:ml-8 lg:my-0 my-7'>
