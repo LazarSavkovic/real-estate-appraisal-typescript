@@ -118,8 +118,8 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
                     </button>
                 </div>
             </aside>
-            <div className="lg:ml-auto lg:w-[73%] xl:w-[79%] 2xl:w-[85%] bg-gray-100 min-h-screen">
-                <div className="sticky z-5 top-14 h-20 bg-white justify-center flex lg:py-2.5 bg-gray-400 drop-shadow">
+            <div className="lg:ml-auto lg:w-[73%] xl:w-[79%] 2xl:w-[85%] bg-slate-100 min-h-screen">
+                <div className="sticky z-5 top-14 h-20 bg-white justify-center flex lg:py-2.5 bg-slate-400 drop-shadow">
                     <div className="pl-6 flex items-center justify-between space-x-4 ">
                         <h5 hidden className="text-2xl text-white text-shadow font-medium lg:block">{getPlace()}</h5>
                         <button onClick={() => setOpen(!open)} className="w-12 h-16 -mr-2 border-r lg:hidden">

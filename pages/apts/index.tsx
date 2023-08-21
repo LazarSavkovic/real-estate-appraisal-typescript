@@ -42,7 +42,7 @@ const Index: FC = () => {
 
   return (
 
-    <div className="flex bg-blue-400 min-h-screen">
+    <div className="flex bg-slate-400 min-h-screen">
       <div className="m-auto bg-slate-50 rounded-md w-[92%] sm:w-4/5 md:w-3/5 mt-24 pt-16  flex justify-center flex-col min-h-screen">
         <h1 className="text-3xl text-center tracking-wider">
           {t('properties in belgrade')}
