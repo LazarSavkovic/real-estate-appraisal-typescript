@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const PredictNewFlat: FC = () => {
+
   const flatForm = {
     title: '',
     location: '',
@@ -18,12 +19,9 @@ const PredictNewFlat: FC = () => {
     long: 0,
   }
 
-
-
-
   return (
-    <div className="container mx-auto my-28 w-3/4" >
-      <div className='flex justify-center'>
+    <div className="mx-auto h-screen p-10 w-[100vw] flex justify-center items-center bg-gradient-to-r from-blue-400 to-indigo-500" >
+      <div className='flex justify-center w-[90%] md:w-[75%] lg:w-[60%] py-16 bg-slate-50 rounded'>
           <FlatForm formId="add-flat-form" flatForm={flatForm} justPredict={true} />
       </div>
     </div>
