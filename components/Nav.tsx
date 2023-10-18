@@ -72,7 +72,7 @@ const Nav: FC = () => {
                     </button>
                 </div>
 
-                <ul className={`lg:flex lg:items-center rounded shadow-md lg:shadow-none lg:pb-0 pb-10 absolute text-sm lg:static bg-white lg:bg-transparent lg:z-auto z-[-1] right-0 w-56 lg:w-auto lg:pl-0 pl-10 transition-all lg:opacity-100 duration-500 opacity-0 ease-in ${open ? 'top-14 opacity-100' : 'top-[-490px]'}`}>
+                <ul className={`lg:flex lg:items-center rounded shadow-md lg:shadow-none lg:pb-0 pb-10 absolute text-sm lg:static bg-white lg:bg-transparent lg:z-auto z-[-1] right-0 w-56 lg:w-auto lg:pl-0 pl-10 transition-all lg:opacity-100 duration-500  ease-in ${open ? 'top-14 opacity-100' : 'top-[-490px] opacity-0'}`}>
                     {
                         Links.map((link) => (
                             <li key={link.name} className='hover:scale-105 focus:scale-95 transition-all lg:ml-8 lg:my-0 my-6'>
