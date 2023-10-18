@@ -66,6 +66,7 @@ const Register: FC = () => {
                     <h1 className='text-gray-800 text-2xl font-bold py-2 tracking-wider'>{t('register')}</h1>
                 </div>
                 <form onSubmit={formik.handleSubmit} className='flex flex-col gap-5'>
+                    <div>
                     <div className={styles.input_group}>
                         <input
                             type='text'
@@ -76,7 +77,10 @@ const Register: FC = () => {
                             <HiOutlineUser size={25} />
                         </span>
                     </div>
-                    {formik.errors.username && formik.touched.username ? <span className='text-rose-500'>{t(formik.errors.username)}</span> : <></>}
+                    {formik.errors.username && formik.touched.username ? <span className='text-rose-500 text-xs m-0'>{t(formik.errors.username)}</span> : <></>}
+                    
+                    </div>
+                    <div>                    
                     <div className={styles.input_group}>
                         <input
                             type='email'
@@ -87,7 +91,9 @@ const Register: FC = () => {
                             <HiAtSymbol size={25} />
                         </span>
                     </div>
-                    {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{t(formik.errors.email)}</span> : <></>}
+                    {formik.errors.email && formik.touched.email ? <span className='text-rose-500 text-xs m-0'>{t(formik.errors.email)}</span> : <></>}
+                    </div>
+                    <div>
                     <div className={styles.input_group}>
                         <input
                             type={show.password ? 'text' : 'password'}
@@ -98,7 +104,9 @@ const Register: FC = () => {
                             <HiFingerPrint size={25} />
                         </span>
                     </div>
-                    {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{t(formik.errors.password)}</span> : <></>}
+                    {formik.errors.password && formik.touched.password ? <span className='text-rose-500 text-xs m-0'>{t(formik.errors.password)}</span> : <></>}
+                    </div>
+                    <div>
                     <div className={styles.input_group}>
                         <input
                             type={show.cpassword ? 'text' : 'password'}
@@ -109,7 +117,8 @@ const Register: FC = () => {
                             <HiFingerPrint size={25} />
                         </span>
                     </div>
-                    {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{t(formik.errors.cpassword)}</span> : <></>}
+                    {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500  text-xs m-0'>{t(formik.errors.cpassword)}</span> : <></>}
+                    </div>
                     <div className={styles.button}>
                         <button type='submit'>
                             {t('register')}

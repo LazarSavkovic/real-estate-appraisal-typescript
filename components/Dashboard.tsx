@@ -32,6 +32,7 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
     }
 
     const getPlace = () => {
+        if(router.pathname.includes('/flats/')) return t('properties');
         switch (router.pathname) {
             case '/flats':
                 return t('properties');
@@ -47,10 +48,10 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
     return (
         <>
             <aside
-                className={`fixed  z-10 top-12 pb-3 px-6 flex flex-col h-screen border-r bg-white transition-all duration-300 w-6/12  sm:w-5/12 md:w-4/12  lg:ml-0 lg:w-[28%] xl:w-[25%] 2xl:w-[20%] ${open ? '' : 'ml-[-100%] '}`}>
+                className={`fixed  z-10 top-12 pb-3 px-6 flex flex-col h-screen border-r bg-white transition-all duration-300 w-6/12  sm:w-5/12 md:w-4/12  lg:ml-0 lg:w-[28%] xl:w-[25%] 2xl:w-[20%] lg:opacity-100 ${open ? 'opacity-100' : ' opacity-0 ml-[-100%] '}`}>
                 <div >
                     <div className="mt-16 text-center">
-                        <img src={session.user.image} alt="" className="w-10 h-10 m-auto rounded-full object-cover lg:w-24 lg:h-24" />
+                        {session.user.image && <img src={session.user.image}  alt="profile-image" className="w-10 h-10 m-auto rounded-full object-cover lg:w-24 lg:h-24" />}
                         <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{session.user.name}</h5>
                         <h5 className="hidden my-2 text-sm text-gray-600 lg:block">{session.user.email}</h5>
                         <span className="hidden text-gray-400 lg:block">{t('guest')}</span>
@@ -118,18 +119,18 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
                     </button>
                 </div>
             </aside>
-            <div className="lg:ml-auto lg:w-[73%] xl:w-[79%] 2xl:w-[85%] bg-slate-100 min-h-screen">
-                <div className="sticky z-5 top-14 h-20 bg-white justify-center flex lg:py-2.5 bg-slate-400 drop-shadow">
-                    <div className="pl-6 flex items-center justify-between space-x-4 ">
-                        <h5 hidden className="text-2xl text-white text-shadow font-medium lg:block">{getPlace()}</h5>
-                        <button onClick={() => setOpen(!open)} className="w-12 h-16 -mr-2 border-r lg:hidden">
+            <div className="lg:ml-auto lg:w-[73%] xl:w-[79%] 2xl:w-[85%] bg-slate-50 min-h-screen">
+                <div className="sticky z-5 top-14 h-20 bg-gradient-to-r from-blue-400 to-indigo-500 justify-center flex lg:py-2.5 bg-slate-400 drop-shadow">
+                    <div className="pl-6 flex  items-center justify-between space-x-4 ">
+                        <h5 className="text-2xl text-white text-shadow font-medium lg:block">{getPlace()}</h5>
+                        <button onClick={() => setOpen(!open)} className="w-12 h-16 -mr-2 absolute left-[10%] border-r lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </button>
                         {(router.pathname === '/flats') && <div className="flex grow justify-end space-x-4">
                             {/* search bar  */}
-                            <div hidden className="md:block grow w-96">
+                            <div className="md:block grow lg:w-[30vw] md:w-[50vw] w-[60vw]">
                                 <div className="relative flex items-center text-gray-400 focus-within:text-cyan-400 ">
                                     <span className="absolute left-4 h-6 flex items-center pr-3 border-r border-gray-300">
                                         <svg xmlns="http://ww50w3.org/2000/svg" className="w-4 fill-current" viewBox="0 0 35.997 36.004">
@@ -140,21 +141,6 @@ const Dashboard: FC<DashboardProps> = ({ children, session, setSearchInput, sear
                                 </div>
                             </div>
                             {/* /search bar  */}
-                            <button aria-label="search" className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200 md:hidden">
-                                <svg xmlns="http://ww50w3.org/2000/svg" className="w-4 mx-auto fill-current text-gray-600" viewBox="0 0 35.997 36.004">
-                                    <path id="Icon_awesome-search" data-name="search" d="M35.508,31.127l-7.01-7.01a1.686,1.686,0,0,0-1.2-.492H26.156a14.618,14.618,0,1,0-2.531,2.531V27.3a1.686,1.686,0,0,0,.492,1.2l7.01,7.01a1.681,1.681,0,0,0,2.384,0l1.99-1.99a1.7,1.7,0,0,0,.007-2.391Zm-20.883-7.5a9,9,0,1,1,9-9A8.995,8.995,0,0,1,14.625,23.625Z"></path>
-                                </svg>
-                            </button>
-                            <button aria-label="chat" className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 m-auto text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                                </svg>
-                            </button>
-                            <button aria-label="notification" className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 m-auto text-gray-600" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                                </svg>
-                            </button>
                         </div>}
                     </div>
                 </div>

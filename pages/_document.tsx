@@ -11,6 +11,7 @@ export default function Document() {
         />
 
         <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
+        <meta name="referrer" content="no-referrer" />
       </Head>
  
       <Script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js' />

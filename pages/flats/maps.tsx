@@ -79,10 +79,12 @@ const Maps: FC<MapsProps> = ({ session }: MapsProps) => {
 
     return (
         <>     <Dashboard session={session}>
+            <div className='p-10 w-full flex justify-center items-center'>
+                <div className='w-[90%] md:w-[80%] lg:w-[70%] h-[70vh]'>
                     {center && <Map
                         {...viewState}
                         onMove={evt => setViewState(evt.viewState)}
-                        style={{ width: '100%', height: 600 }}
+                        style={{ width: '100%', height: '100%' }}
                         mapStyle="mapbox://styles/mapbox/streets-v11"
                         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}>
                         {flats && flats.map(flat => (
@@ -116,6 +118,8 @@ const Maps: FC<MapsProps> = ({ session }: MapsProps) => {
                                 {selectedLocation.title}
                             </Popup>}
                     </Map>}
+                    </div>
+                    </div>
                 </Dashboard>
             </>
 

@@ -73,14 +73,19 @@ const FlatPage: FC<FlatPageProps> = ({ session, userId, flatId }: FlatPageProps)
 
     <>
         {session && flat && <Dashboard session={session}>
+        <div className='p-10 w-full flex justify-center items-center'>
+                <div className='w-[90%] md:w-[85%] lg:w-[80%] h-[70vh]'>
           <div className='flex pb-3 w-[100%] justify-self-end'>
             {!apts[0] && <button onClick={showApts} className='button'>{t('show properties on market')}</button>}
             {apts[0] && <button onClick={removeApts} className='button'>{t('remove properties on market')}</button>}
           </div>
           <FlatBigCard key={flat._id?.toString()} flat={flat} handleDelete={handleDelete} apts={apts} />
-        </ Dashboard>}
+          </div></div>
+        </ Dashboard>
+        }
 
         {message && <p>{message}</p>}
+        
 
       </ >
   )

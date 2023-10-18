@@ -52,6 +52,7 @@ const Login: FC = () => {
                 <div className='title'>
                     <h1 className='text-gray-800 text-2xl font-bold py-2 tracking-wider'>{t('log in')}</h1></div>
                 <form onSubmit={formik.handleSubmit} className='flex flex-col gap-5'>
+                    <div>
                     <div className={styles.input_group}>
                         <input
                             type='email'
@@ -62,7 +63,9 @@ const Login: FC = () => {
                             <HiAtSymbol size={25} />
                         </span>
                     </div>
-                    {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{t(formik.errors.email)}</span> : <></>}
+                    {formik.errors.email && formik.touched.email ? <span className='text-rose-500 text-xs m-0'>{t(formik.errors.email)}</span> : <></>}
+                    </div>
+                    <div>
                     <div className={styles.input_group}>
                         <input
                             type={show ? 'text' : 'password'}
@@ -73,7 +76,8 @@ const Login: FC = () => {
                             <HiFingerPrint size={25} />
                         </span>
                     </div>
-                    {formik.errors.password && formik.touched.email ? <span className='text-rose-500'>{t(formik.errors.password)}</span> : <></>}
+                    {formik.errors.password && formik.touched.email ? <span className='text-rose-500  text-xs m-0'>{t(formik.errors.password)}</span> : <></>}
+                    </div>
                     <button type='submit' className={styles.button}>
                     {t('log in')}
                     </button>

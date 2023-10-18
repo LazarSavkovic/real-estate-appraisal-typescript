@@ -30,7 +30,7 @@ const NewFlat: FC<NewFlatProps> = ({ userId, session }: NewFlatProps) => {
   return (
     <>
         <Dashboard session={session} >
-          <div className='flex items-center justify-center'>
+          <div className='flex items-center justify-center pt-8'>
             <FlatForm formId="add-flat-form" flatForm={flatForm} userId={userId} />
           </div>
         </Dashboard>

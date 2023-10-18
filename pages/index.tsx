@@ -19,10 +19,10 @@ const Guest: FC = () => {
         {t("real estate appraisal")}
       </h3>
       <div className='flex justify-center'>
-        <Link href='/flats/predict' legacyBehavior><a className='mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("evaluate the property")}</a></Link>
+        <Link href='/flats/predict' legacyBehavior><a className='hover:scale-105 focus:scale-95 transition-all duration-200 hover:shadow-md mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("evaluate the property")}</a></Link>
       </div>
       <div className='flex justify-center'>
-        <Link href='/login' legacyBehavior><a className='mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("sign in")}</a></Link>
+        <Link href='/login' legacyBehavior><a className='hover:scale-105 focus:scale-95 transition-all duration-200 hover:shadow-md mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("sign in")}</a></Link>
       </div>
     </div>
   )
@@ -44,16 +44,15 @@ const User: FC<UserProps> = ({ session }: UserProps) => {
         {t("real estate appraisal")}
       </h3>
       <div className='details'>
+        {session.user?.image && <img src={session.user?.image} alt="" className="w-16 h-16 m-auto rounded-full object-cover lg:w-16 lg:h-16 inline" />}
         {session.user?.name && <h5>{session.user.name}</h5> ||
           <h5>{session.user?.email}</h5>}
-
-        {session.user?.image && <img src={session.user?.image} alt="" className="w-16 h-16 m-auto rounded-full object-cover lg:w-16 lg:h-16 inline" />}
       </div>
       <div className='flex justify-center'>
-        <Link href='/flats/new' legacyBehavior><a className='hover:scale-105 focus:scale-95 transition-all mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("new property")}</a></Link>
+        <Link href='/flats/new' legacyBehavior><a className='hover:scale-105 focus:scale-95 transition-all duration-200 hover:shadow-md mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("new property")}</a></Link>
       </div>
       <div className='flex justify-center'>
-        <Link href='/flats' legacyBehavior><a className='hover:scale-105 focus:scale-95 transition-all mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("my properties")}</a></Link>
+        <Link href='/flats' legacyBehavior><a className='hover:scale-105 focus:scale-95 transition-all duration-200 hover:shadow-md mt-5 px-10 py-3 w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md text-gray-50'>{t("my properties")}</a></Link>
       </div>
     </div>
   )

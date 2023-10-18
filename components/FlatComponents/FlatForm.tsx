@@ -19,7 +19,7 @@ interface FlatFormProps {
 const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = true, justPredict = false }: FlatFormProps) => {
 
   // const { t } = useTranslation('common')
-  const { t} = useTranslation(['flats', 'flatform'])
+  const { t } = useTranslation(['flats', 'flatform'])
 
   interface IErrors {
     title?: string;
@@ -182,89 +182,93 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     if (Object.keys(errs).length === 0) {
       forNewFlat ? postData(form) : putData(form)
     } else {
-      setErrors( errs )
+      setErrors(errs)
     }
   }
 
-console.log(t('title is missing', {ns: 'flatForm'}))
+  console.log(t('title is missing', { ns: 'flatForm' }))
   return (
     <>
       <form className='w-[100%] md:w-3/4 lg:w-[65%] xl:w-[60%]' id={formId} onSubmit={handleSubmit}>
         <div className="mb-6">
-          <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('title', {ns: 'flats'})}</label>
+          <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('title', { ns: 'flats' })}</label>
           <input
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            className="shadow-sm bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
             maxLength={35}
             name="title"
             value={form.title}
             onChange={handleChange}
-            // required
+          // required
           />
-          {errors.title && <p className="text-sm text-red-500">{t(errors.title, {ns: 'flatForm'})}</p>}
+          {errors.title && <p className="text-sm text-red-500">{t(errors.title, { ns: 'flatForm' })}</p>}
         </div>
         <div className="mb-6">
-          <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('address', {ns: 'flats'})}</label>
+          <label htmlFor="location" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('address', { ns: 'flats' })}</label>
           <input
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            className="shadow-sm bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
             maxLength={50}
             name="location"
             value={form.location}
             onChange={handleChange}
-            // required
+          // required
           />
-          {errors.location && <p className="text-sm text-red-500">{t(errors.location, {ns: 'flatForm'})}</p>}
+          {errors.location && <p className="text-sm text-red-500">{t(errors.location, { ns: 'flatForm' })}</p>}
         </div>
 
         <div className="mb-6">
-          <label htmlFor="short_description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('short description', {ns: 'flats'})}</label>
+          <label htmlFor="short_description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('short description', { ns: 'flats' })}</label>
           <input
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            className="shadow-sm bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             type="text"
             maxLength={30}
             name="short_description"
             value={form.short_description}
             onChange={handleChange}
-            // required
+          // required
           />
-          {errors.short_description && <p className="text-sm text-red-500">{t(errors.short_description, {ns: 'flatForm'})}</p>}
+          {errors.short_description && <p className="text-sm text-red-500">{t(errors.short_description, { ns: 'flatForm' })}</p>}
         </div>
-        <div className="mb-6">
-          <label htmlFor="sq_mt" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('area', {ns: 'flats'})}</label>
-          <input
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            type="number"
-            name="sq_mt"
-            value={form.sq_mt}
-            onChange={handleChange}
-          />
-           {errors.sq_mt && <p className="text-sm text-red-500">{t(errors.sq_mt, {ns: 'flatForm'})}</p>}
+        <div className='flex justify-between gap-4'>
+          <div className="mb-6">
+            <label htmlFor="sq_mt" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('area', { ns: 'flats' })}</label>
+            <input
+              className="shadow-sm bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              type="number"
+              name="sq_mt"
+              value={form.sq_mt}
+              onChange={handleChange}
+            />
+            {errors.sq_mt && <p className="text-sm text-red-500">{t(errors.sq_mt, { ns: 'flatForm' })}</p>}
+          </div>
+
+          <div className="mb-6">
+            <label htmlFor="rooms" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('rooms', { ns: 'flats' })}</label>
+            <input
+              className="shadow-sm bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              type="number"
+              name="rooms"
+              value={form.rooms}
+              onChange={handleChange}
+            />
+            {errors.rooms && <p className="text-sm text-red-500">{t(errors.rooms, { ns: 'flatForm' })}</p>}
+          </div>
+
+
+          <div className="mb-6">
+            <label htmlFor="floor" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('floor', { ns: 'flats' })}</label>
+            <input
+              className="shadow-sm bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              name="floor"
+              type="number"
+              value={form.floor}
+              onChange={handleChange}
+            />
+            {errors.floor && <p className="text-sm text-red-500">{t(errors.floor, { ns: 'flatForm' })}</p>}
+          </div>
         </div>
-        <div className="mb-6">
-          <label htmlFor="rooms" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('rooms', {ns: 'flats'})}</label>
-          <input
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            type="number"
-            name="rooms"
-            value={form.rooms}
-            onChange={handleChange}
-          />
-           {errors.rooms && <p className="text-sm text-red-500">{t(errors.rooms, {ns: 'flatForm'})}</p>}
-        </div>
-       
-        <div className="mb-6">
-          <label htmlFor="floor" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('floor', {ns: 'flats'})}</label>
-          <input
-            className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            name="floor"
-            type="number"
-            value={form.floor}
-            onChange={handleChange}
-          />
-          {errors.floor && <p className="text-sm text-red-500">{t(errors.floor, {ns: 'flatForm'})}</p>}
-        </div>
-        
+
         <button type="submit" className="text-white bg-gradient-to-r from-blue-500 to-indigo-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
           {t('submit')}
         </button>
