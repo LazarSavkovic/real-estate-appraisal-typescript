@@ -85,9 +85,6 @@ const Login: FC = () => {
                     <button type='button' onClick={handleGoogleSignIn} className={styles.button_custom}>
                     {t('log in with google')}<Image src='/images/google.svg' alt='google.svg' width='20' height='20'></Image>
                     </button>
-                    <button type='button' className={styles.button_custom}>
-                    {t('log in with github')} <Image src='/images/github.svg'  alt='github.svg' width='25' height='25'></Image>
-                    </button>
                 </form>
                 <p className='text-center text-gray-400'>
                 {t('dont have account?')} <Link href='/register' legacyBehavior><a className='text-blue-700'>{t('register')}</a></Link>
