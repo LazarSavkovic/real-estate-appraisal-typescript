@@ -35,6 +35,8 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
   }, [flats, searchInput])
 
   
+  const { t } = useTranslation('flats');
+  
   if (isLoading) {
     return <div>Učitava se</div>
   }
@@ -43,7 +45,6 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
     return<div>{error.message}</div>
   }
 
-  const { t } = useTranslation('flats');
 
   return (
 

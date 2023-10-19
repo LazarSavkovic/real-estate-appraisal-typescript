@@ -23,6 +23,7 @@ const EditFlat: FC<EditFlatProps> = ({ session, userId, flatId }: EditFlatProps)
 
   const { data: flat, error } = useQuery(['flats', flatId], () => getFlat({ userId, flatId }))
 
+  const { t } = useTranslation('flats')
 
   if (error) return <p>Failed to load</p>
   if (!flat) return <p>Loading...</p>
@@ -36,7 +37,6 @@ const EditFlat: FC<EditFlatProps> = ({ session, userId, flatId }: EditFlatProps)
     rooms: flat.rooms
   }
 
-  const { t } = useTranslation('flats')
 
   return (
     <>

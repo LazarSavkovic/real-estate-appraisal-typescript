@@ -24,30 +24,30 @@ const PredictedFlats: FC = () => {
         setFlats([...oldFlats])
     }, [])
 
-    
-  const { t } = useTranslation('flats');
+
+    const { t } = useTranslation('flats');
 
     return (
-        
-        <>
-          <Head>
-           <title>{t('predicted properties')}</title>
-       </Head>
-       <div className="mx-auto min-h-screen w-[100vw] flex flex-col pt-20 items-center bg-gradient-to-r from-blue-400 to-indigo-500" >
-      <div className='flex flex-col justify-center w-[90%] md:w-[70%] lg:w-[50%]  bg-slate-100 shadow-md rounded'>
-      <div className="flex flex-col items-center justify-center h-20 space-x-4 bg-gradient-to-r from-blue-500 to-indigo-600">
-        <h5 className="text-2xl text-white text-shadow font-medium lg:block">Predicted properties</h5>
-      </div>
-      <div className='p-6'>
-        {flats.map((flat) => {
-                        if (flat) {
-                            return <FlatCard key={flat._id?.toString()} flat={flat} predicted={true} />
-                        }
-                    })}
-                </div>
 
+        <>
+            <Head>
+                <title>{t('predicted properties')}</title>
+            </Head>
+            <div className="mx-auto min-h-screen w-[100vw] flex flex-col pt-20 items-center bg-gradient-to-r from-blue-400 to-indigo-500" >
+                <div className='flex flex-col justify-center w-[90%] md:w-[70%] lg:w-[50%]  bg-slate-100 shadow-md rounded'>
+                    <div className="flex flex-col items-center justify-center h-20 space-x-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+                        <h5 className="text-2xl text-white text-shadow font-medium lg:block">{t('predicted properties')}</h5>
+                    </div>
+                    <div className='p-6'>
+                        {flats.map((flat) => {
+                            if (flat) {
+                                return <FlatCard key={flat._id?.toString()} flat={flat} predicted={true} />
+                            }
+                        })}
+                    </div>
+
+                </div>
             </div>
-        </div>
         </>
 
 
@@ -70,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, locale }) =>
         props: {
             ...(await serverSideTranslations(locale!, ['common', 'flats'])),
             // Will be passed to the page component as props
-          }
+        }
     }
 
 }
