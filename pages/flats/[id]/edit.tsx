@@ -7,6 +7,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react';
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
+import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
+
 
 interface EditFlatProps {
   session: Session,
@@ -33,8 +36,13 @@ const EditFlat: FC<EditFlatProps> = ({ session, userId, flatId }: EditFlatProps)
     rooms: flat.rooms
   }
 
+  const { t } = useTranslation('flats')
+
   return (
     <>
+    <Head>
+      <title>{t('my property')}</title>
+    </Head> 
         <Dashboard session={session} >
           <div className='flex items-center justify-center'>
             <FlatForm formId="edit-flat-form" flatForm={flatForm} forNewFlat={false} />

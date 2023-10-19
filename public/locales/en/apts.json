@@ -12,5 +12,7 @@
     "longitude": "Longitude",
     "edit": "Edit",
     "delete": "Delete",
-    "submit": "Submit"
+    "submit": "Submit",
+    "new property": "New Property",
+    "edit property": "Edit the Property"
 }

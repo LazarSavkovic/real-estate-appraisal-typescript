@@ -43,10 +43,11 @@ const Login: FC = () => {
     }
 
     return (
-        <AuthLayout>
-            <Head>
+        <>
+         <Head>
                 <title>{t('log in')}</title>
             </Head>
+        <AuthLayout>
             <section
                 className='w-3/4 mx-auto flex flex-col gap-5'>
                 <div className='title'>
@@ -93,6 +94,7 @@ const Login: FC = () => {
                 </p>
             </section>
         </AuthLayout >
+        </>
     )
 }
 

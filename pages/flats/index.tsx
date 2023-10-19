@@ -8,6 +8,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
 import { FlatType } from 'utils/types';
+import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 interface FlatsProps {
   session: Session
@@ -41,10 +43,14 @@ const Flats: FC<FlatsProps> = ({ session }: FlatsProps) => {
     return<div>{error.message}</div>
   }
 
+  const { t } = useTranslation('flats');
 
   return (
 
     <>
+      <Head>
+               <title>{t('properties')}</title>
+           </Head>
         {session && filteredFlats && <Dashboard session={session} setSearchInput={setSearchInput} searchInput={searchInput}>
           <div className='flex flex-col items-center'>
             {filteredFlats && filteredFlats.map((flat) => (

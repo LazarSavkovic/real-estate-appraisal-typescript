@@ -30,7 +30,7 @@ const Index: FC = () => {
   useEffect(() => {
     console.log(posts, isLoading, isError)
   }, [posts, isLoading, isError]
-)
+  )
 
   if (isLoading) {
     return <div>Učitava se</div>
@@ -42,28 +42,30 @@ const Index: FC = () => {
 
   return (
 
-    <div className="flex bg-slate-400 min-h-screen">
-      <div className="m-auto bg-slate-50 rounded-md w-[92%] sm:w-4/5 md:w-3/5 mt-24 pt-16  flex justify-center flex-col min-h-screen">
-        <h1 className="text-3xl text-center tracking-wider">
-          {t('properties in belgrade')}
-        </h1>
-        {paginatedPosts && <>
-          <div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'>
-            {paginatedPosts.map((apt) => (
-              <AptCard key={apt._id?.toString()} apt={apt} />
-            ))}
+    <div className="mx-auto min-h-screen w-[100vw] flex flex-col pt-24 items-center bg-gradient-to-r from-blue-400 to-indigo-500" >
+      <div className='flex flex-col justify-center w-[90%] md:w-[75%] lg:w-[60%]  bg-slate-100 shadow-md rounded'>
+        <div className="flex flex-col items-center justify-center h-20 space-x-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+          <h5 className="text-2xl text-white text-shadow font-medium lg:block">{t('properties in belgrade')}</h5>
+        </div>
+        <div className='p-6 flex justify-center flex-col'>
+          {paginatedPosts && <>
+            <div className='grid lg:grid-cols-2 m-auto pt-10 justify-center'>
+              {paginatedPosts.map((apt) => (
+                <AptCard key={apt._id?.toString()} apt={apt} />
+              ))}
 
-          </div>
+            </div>
 
-          <Pagination
-            items={posts.length}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-        </>
-        }
+            <Pagination
+              items={posts.length}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          </>
+          }
 
+        </div>
       </div>
     </div>
 

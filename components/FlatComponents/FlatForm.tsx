@@ -30,12 +30,10 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     floor?: string;
   }
 
-  console.log(t('address'))
   const router = useRouter()
   const contentType = 'application/json'
   const [errors, setErrors] = useState<IErrors>({})
   const [message, setMessage] = useState('')
-  console.log("user Id je", userId)
 
   const [form, setForm] = useState({
     title: (flatForm?.title || ''),
@@ -186,10 +184,9 @@ const FlatForm: FC<FlatFormProps> = ({ userId, formId, flatForm, forNewFlat = tr
     }
   }
 
-  console.log(t('title is missing', { ns: 'flatForm' }))
   return (
     <>
-      <form className='w-[100%] md:w-3/4 lg:w-[65%] xl:w-[60%]' id={formId} onSubmit={handleSubmit}>
+      <form className='w-[100%]' id={formId} onSubmit={handleSubmit}>
         <div className="mb-6">
           <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">{t('title', { ns: 'flats' })}</label>
           <input

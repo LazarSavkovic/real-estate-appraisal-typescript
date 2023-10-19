@@ -10,5 +10,9 @@
     "remove properties on market": "Remove properties on the market",
     "edit": "Edit",
     "delete": "Delete",
-    "submit": "Submit"
+    "submit": "Submit",
+    "new property": "New Property",
+    "properties": "Properties",
+    "predicted properties": "Predicted Properties",
+    "my property": "My Property"
 }

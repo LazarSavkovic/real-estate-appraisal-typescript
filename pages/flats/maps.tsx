@@ -9,6 +9,8 @@ import { dehydrate, QueryClient, useQuery, UseQueryResult } from 'react-query';
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
 import { FlatType } from 'utils/types';
+import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 interface MapsProps {
     session: Session
@@ -75,10 +77,15 @@ const Maps: FC<MapsProps> = ({ session }: MapsProps) => {
         console.log('closing popup')
         setShowPopup(false)
     }
+    const { t } = useTranslation('dashboard');
 
 
     return (
-        <>     <Dashboard session={session}>
+        <>
+        <Head>
+               <title>{t('map of properties')}</title>
+           </Head>
+           <Dashboard session={session}>
             <div className='p-10 w-full flex justify-center items-center'>
                 <div className='w-[90%] md:w-[80%] lg:w-[70%] h-[70vh]'>
                     {center && <Map

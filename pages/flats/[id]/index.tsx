@@ -10,6 +10,7 @@ import { useTranslation } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
 import { AptType, FlatType } from 'utils/types'
+import Head from 'next/head'
 
 interface FlatPageProps {
   session: Session,
@@ -72,6 +73,9 @@ const FlatPage: FC<FlatPageProps> = ({ session, userId, flatId }: FlatPageProps)
   return (
 
     <>
+    <Head>
+      <title>{t('my property')}</title>
+    </Head> 
         {session && flat && <Dashboard session={session}>
         <div className='p-10 w-full flex justify-center items-center'>
                 <div className='w-[90%] md:w-[85%] lg:w-[80%] h-[70vh]'>

@@ -4,6 +4,9 @@ import FlatCard from '../../components/FlatComponents/FlatCard'
 import { useEffect, useState, FC } from 'react'
 import { GetServerSideProps } from 'next'
 import { FlatType } from 'utils/types'
+import { useTranslation } from 'next-i18next'
+import Head from 'next/head'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 
 const PredictedFlats: FC = () => {
@@ -21,11 +24,22 @@ const PredictedFlats: FC = () => {
         setFlats([...oldFlats])
     }, [])
 
+    
+  const { t } = useTranslation('flats');
+
     return (
-        <div className="container mx-auto my-28 w-3/4" >
-            <div className='grid grid-cols-1'>
-                <div className={styles.container}>
-                    {flats.map((flat) => {
+        
+        <>
+          <Head>
+           <title>{t('predicted properties')}</title>
+       </Head>
+       <div className="mx-auto min-h-screen w-[100vw] flex flex-col pt-20 items-center bg-gradient-to-r from-blue-400 to-indigo-500" >
+      <div className='flex flex-col justify-center w-[90%] md:w-[70%] lg:w-[50%]  bg-slate-100 shadow-md rounded'>
+      <div className="flex flex-col items-center justify-center h-20 space-x-4 bg-gradient-to-r from-blue-500 to-indigo-600">
+        <h5 className="text-2xl text-white text-shadow font-medium lg:block">Predicted properties</h5>
+      </div>
+      <div className='p-6'>
+        {flats.map((flat) => {
                         if (flat) {
                             return <FlatCard key={flat._id?.toString()} flat={flat} predicted={true} />
                         }
@@ -34,12 +48,13 @@ const PredictedFlats: FC = () => {
 
             </div>
         </div>
+        </>
 
 
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale }) => {
     const session = await getSession({ req })
 
     if (session) {
@@ -52,7 +67,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     }
 
     return {
-        props: {}
+        props: {
+            ...(await serverSideTranslations(locale!, ['common', 'flats'])),
+            // Will be passed to the page component as props
+          }
     }
 
 }

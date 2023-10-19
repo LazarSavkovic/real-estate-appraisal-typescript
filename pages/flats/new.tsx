@@ -5,6 +5,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { FC } from 'react'
 import { GetServerSideProps } from 'next'
 import { Session } from 'next-auth'
+import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 interface NewFlatProps {
   userId: string,
@@ -24,11 +26,14 @@ const NewFlat: FC<NewFlatProps> = ({ userId, session }: NewFlatProps) => {
     long: 0,
   }
 
-
+  const { t } = useTranslation('flats');
 
 
   return (
     <>
+    <Head>
+           <title>{t('new property')}</title>
+       </Head>
         <Dashboard session={session} >
           <div className='flex items-center justify-center pt-8'>
             <FlatForm formId="add-flat-form" flatForm={flatForm} userId={userId} />

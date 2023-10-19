@@ -10,5 +10,8 @@
     "remove properties on market" : "Skloni nekretnine na tržištu",
     "edit": "Izmeni",
     "delete": "Izbriši",
-    "submit": "Unesi"
+    "submit": "Unesi",
+    "new property": "Nova Nekretnina",
+    "properties": "Nekretnine",
+    "my property": "Moja Nekretnina"
 }

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
 import { useTranslation } from 'next-i18next'
+import { RiHomeHeartFill } from 'react-icons/ri'
 
 
 
@@ -22,7 +23,6 @@ const Nav: FC = () => {
     }
     const router = useRouter();
     const { locale, locales } = router;
-    console.log(locale, locales)
     const oppositeLocale = locales!.filter((loc => loc !== locale))[0]
 
     const handleLanguageChange = () => {
@@ -49,9 +49,7 @@ const Nav: FC = () => {
             className='shadow-md w-full fixed top-0 left-0 z-50  '>
             <div className='md:flex items-center justify-between bg-white py-4 h-14 md:px-10 px-7'>
                 <Link href='/' legacyBehavior><a className='font-bold text-l cursor-pointer flex items-center text-gray-800'>
-                    {/* <span className='text-2xl text-indigo-600 mr-1'>
-             
-                    </span> */}
+                    <RiHomeHeartFill className='text-indigo-700'/>
                     PROCENA/NEKRETNINE</a>
                 </Link>
 

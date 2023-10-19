@@ -12,5 +12,7 @@
     "longitude": "Longituda",
     "edit": "Izmeni",
     "delete": "Izbriši",
-    "submit": "Unesi"
+    "submit": "Unesi",
+    "new property": "Nova Nekretnina",
+    "edit property": "Izmeni Nekretninu"
 }

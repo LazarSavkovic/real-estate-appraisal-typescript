@@ -5,6 +5,8 @@ import { getSession } from 'next-auth/react'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GetServerSideProps } from 'next'
 import { FlatType } from 'utils/types'
+import Head from 'next/head'
+import { useTranslation } from 'next-i18next'
 
 
 const PredictedFlatPage: FC = () => {
@@ -48,15 +50,21 @@ const PredictedFlatPage: FC = () => {
     //   setMessage('Failed to delete the flat.')
     // }
   }
+  
+  const { t } = useTranslation('flats');
 
   return (
-
-    <div className="container mx-auto my-28 w-3/4" >
-      <div className='grid grid-cols-1'>
-        {flat && <FlatBigCard key={flat._id?.toString()} flat={flat} handleDelete={handleDelete} />}
-        {message && <p>{message}</p>}
-      </div>
-    </div >
+    <>
+      <Head>
+        <title>{t('my property')}</title>
+      </Head>
+      <div className="container mx-auto my-28 w-3/4" >
+        <div className='grid grid-cols-1'>
+          {flat && <FlatBigCard key={flat._id?.toString()} flat={flat} handleDelete={handleDelete} />}
+          {message && <p>{message}</p>}
+        </div>
+      </div >
+    </>
   )
 }
 
