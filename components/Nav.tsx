@@ -13,7 +13,7 @@ const Nav: FC = () => {
     let Links = [
         { name: t('my properties'), link: "/flats" },
         { name: t('market'), link: "/apts" },
-        { name: t('contact us'), link: "/" },
+        // { name: t('contact us'), link: "/" },
     ];
     let [open, setOpen] = useState(false);
 

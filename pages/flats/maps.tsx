@@ -77,6 +77,7 @@ const Maps: FC<MapsProps> = ({ session }: MapsProps) => {
         console.log('closing popup')
         setShowPopup(false)
     }
+    
     const { t } = useTranslation('dashboard');
 
 

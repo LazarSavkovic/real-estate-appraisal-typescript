@@ -59,6 +59,7 @@ const User: FC<UserProps> = ({ session }: UserProps) => {
 const Home: FC = () => {
 
   const { data: session } = useSession();
+  console.log(session, 'usesession')
 
   function handleSignOut() {
     signOut()

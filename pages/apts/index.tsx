@@ -28,6 +28,7 @@ const Index: FC = () => {
   const paginatedPosts: AptType[] = paginate(posts, currentPage, pageSize);
 
   useEffect(() => {
+    console.log('here')
     console.log(posts, isLoading, isError)
   }, [posts, isLoading, isError]
   )
