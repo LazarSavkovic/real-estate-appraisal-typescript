@@ -6,6 +6,12 @@ import GoogleProvider from "next-auth/providers/google"
 import clientPromise from "../../../utils/mongodb"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 
+interface Credentials {
+  email: string
+  password: string
+  // Add other properties if necessary
+}
+
 const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
   session: {
@@ -13,40 +19,37 @@ const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.NEXT_GOOGLE_ID,
-      clientSecret: process.env.NEXT_GOOGLE_SECRET,
-      async authorize(credentials, req) {
-        const result = await User.findOne({ email: credentials.email })
-        if (!result) {
-          throw new Error('Nema korisnika sa ovim e-mailom')
-        }
-
-        const equalPasswords = await compare(credentials.password, result.password)
-
-        if (!equalPasswords || result.email !== credentials.email) {
-          throw new Error('Korisnicko ime ili sifra se ne poklapa')
-        }
-        console.log(result, 'result')
-        return result;
-      },
+      clientId: process.env.NEXT_GOOGLE_ID as string,
+      clientSecret: process.env.NEXT_GOOGLE_SECRET as string
     }),
     CredentialsProvider({
       type: "credentials",
       credentials: {},
-      async authorize(credentials, req) {
-        const result = await User.findOne({ email: credentials.email })
+      async authorize(credentials): Promise<any> {
+
+        // can you define the typing of credentials here!!! not in the brackets
+        const typedCredentials = credentials as Credentials;
+
+        if (!typedCredentials || !typedCredentials.email) {
+          // Handle missing or invalid credentials
+          return null;
+        }
+
+        const result = await User.findOne({ email: typedCredentials.email })
         if (!result) {
           throw new Error('Nema korisnika sa ovim e-mailom')
         }
 
-        const equalPasswords = await compare(credentials.password, result.password)
+        const equalPasswords = await compare(typedCredentials.password, result.password)
 
-        if (!equalPasswords || result.email !== credentials.email) {
+        if (!equalPasswords || result.email !== typedCredentials.email) {
           throw new Error('Korisnicko ime ili sifra se ne poklapa')
         }
         console.log(result, 'result')
         return result;
-      },
+      }
+
+
     }),
   ],
   // pages: {
@@ -60,13 +63,16 @@ const authOptions: NextAuthOptions = {
       return true;
     },
 
-    async session({ session, token, user  }) {
-      session.user._id = token.sub;
-      // console.log(session, 'session')
-      // console.log(token, 'token')
-      // console.log(user, 'user')
+    async session({ session, token, user }) {
+      // Use optional chaining and type assertions
+      const userId = token?.sub as string | undefined;
+
+      if (session && session.user && userId) {
+        // Assign the user ID to session.user._id
+        session.user._id = userId;
+      }
       return session;
-      }, 
+    },
   },
   secret: '7aiYsX0GKxOyjwJEiuEGLPWoWIJeSSBOx+vgqx8ABlM='
 };
